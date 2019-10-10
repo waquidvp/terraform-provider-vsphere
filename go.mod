@@ -4,6 +4,7 @@ replace github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.3.0
 
 require (
 	github.com/Sirupsen/logrus v0.0.0-00010101000000-000000000000 // indirect
+	github.com/bflad/tfproviderlint v0.5.0 // indirect
 	github.com/davecgh/go-spew v1.1.1
 	github.com/dustinkirkland/golang-petname v0.0.0-20190613200456-11339a705ed2 // indirect
 	github.com/hashicorp/terraform v0.12.9
