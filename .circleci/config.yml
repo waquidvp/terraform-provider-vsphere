@@ -47,11 +47,27 @@ jobs:
         command: |
           cd $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere
           make build
+  linters:
+    docker: 
+    - image: circleci/golang:1.13
+    working_directory: ~/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: "Get tfproviderlint"
+        command: |
+          go get github.com/bflad/tfproviderlint/cmd/tfproviderlint
+    - run:
+        name: "Run tfproviderlint"
+        command: |
+          tfproviderlint -AT00{1..3} -R00{2..4} -S0{{01..12},{14..19}}  ./...
+
 workflows:
   version: 2
   commit:
     jobs:
       - build
+      - linters
   nightly:
     triggers:
       - schedule:
@@ -62,4 +78,5 @@ workflows:
                 - master
     jobs:
       - build
+      - linters
       - test_acc
