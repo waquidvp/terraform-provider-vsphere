@@ -1420,9 +1420,6 @@ workflows:
     jobs:
       - linters
       - build
-    jobs:
-      - linters
-      - build
       - test_acc_Client
       - test_acc_DataSourceVSphereComputeCluster:
           requires:
