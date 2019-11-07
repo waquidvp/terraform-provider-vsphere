@@ -1420,14 +1420,6 @@ workflows:
     jobs:
       - linters
       - build
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 3 * * *"
-          filters: 
-            branches:
-              only:
-                - master
     jobs:
       - linters
       - build
