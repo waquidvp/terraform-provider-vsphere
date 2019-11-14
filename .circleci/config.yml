@@ -50,9 +50,6 @@ jobs:
     - checkout
     - run:
         name: "Move to GOPATH"
-        command: |
-          mkdir -p $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere
-          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere
     - add_ssh_keys:
         fingerprints:
           - "62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12"
