@@ -42,6 +42,16 @@ jobs:
         command: |
           cd $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere
           tfproviderlint -AT00{1..3} -R00{2..4} -S0{{01..12},{14..19}}  ./...
+  revert_snapshot:
+    docker: 
+    - image: circleci/golang:1.13
+    working_directory: $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+      name: "revert snapshot"
+        command: |
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/revert_snapshot.sh
   test_acc_Client:
     docker: 
     - image: circleci/golang:1.13
