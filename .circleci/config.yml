@@ -48,8 +48,6 @@ jobs:
     working_directory: $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere
     steps:
     - checkout
-    - run:
-        name: "Move to GOPATH"
     - add_ssh_keys:
         fingerprints:
           - "62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12"
