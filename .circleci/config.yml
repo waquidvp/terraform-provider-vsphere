@@ -1442,7 +1442,7 @@ workflows:
       - linters
       - build
       - revert_snapshot
-      - test_acc_Client
+      - test_acc_Client:
           requires:
             - revert_snapshot
       - test_acc_DataSourceVSphereComputeCluster:
@@ -1601,7 +1601,7 @@ workflows:
       - linters
       - build
       - revert_snapshot
-      - test_acc_Client
+      - test_acc_Client:
           requires:
             - revert_snapshot
       - test_acc_DataSourceVSphereComputeCluster:
