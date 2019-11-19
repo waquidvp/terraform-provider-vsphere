@@ -1441,10 +1441,10 @@ workflows:
     jobs:
       - linters
       - build
-      - test_acc_Client
+      - test_acc_ResourceVSphereTag
       - test_acc_ResourceVSphereTagCategory:
           requires:
-            - test_acc_Client
+            - test_acc_ResourceVSphereTag
       - test_acc_ResourceVSphereVAppContainer:
           requires:
             - test_acc_ResourceVSphereTagCategory
