@@ -214,7 +214,6 @@ func resourceVSphereComputeCluster() *schema.Resource {
 				Type:        schema.TypeMap,
 				Optional:    true,
 				Description: "Advanced configuration options for DRS and DPM.",
-				Elem:        &schema.Schema{Type: schema.TypeString},
 			},
 			// HA - General
 			"ha_enabled": {
@@ -417,7 +416,6 @@ func resourceVSphereComputeCluster() *schema.Resource {
 				Type:        schema.TypeMap,
 				Optional:    true,
 				Description: "Advanced configuration options for vSphere HA.",
-				Elem:        &schema.Schema{Type: schema.TypeString},
 			},
 			// Proactive HA
 			"proactive_ha_enabled": {
