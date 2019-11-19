@@ -1442,21 +1442,9 @@ workflows:
       - linters
       - build
       - test_acc_Client
-      - test_acc_DataSourceVSphereComputeCluster:
-          requires:
-            - test_acc_Client
-      - test_acc_DataSourceVSphereTag:
-          requires:
-            - test_acc_DataSourceVSphereResourcePool
-      - test_acc_DataSourceVSphereTagCategory:
-          requires:
-            - test_acc_DataSourceVSphereTag
-      - test_acc_ResourceVSphereTag:
-          requires:
-            - test_acc_DataSourceVSphereTagCategory
       - test_acc_ResourceVSphereTagCategory:
           requires:
-            - test_acc_ResourceVSphereTag
+            - test_acc_Client
       - test_acc_ResourceVSphereVAppContainer:
           requires:
             - test_acc_ResourceVSphereTagCategory
