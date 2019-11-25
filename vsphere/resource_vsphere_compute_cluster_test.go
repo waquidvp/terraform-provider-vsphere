@@ -37,25 +37,6 @@ func TestAccResourceVSphereComputeCluster_basic(t *testing.T) {
 					testAccResourceVSphereComputeClusterCheckDRSEnabled(false),
 				),
 			},
-		},
-	})
-}
-
-func TestAccResourceVSphereComputeCluster_import(t *testing.T) {
-	resource.Test(t, resource.TestCase{
-		PreCheck: func() {
-			testAccPreCheck(t)
-			testAccResourceVSphereComputeClusterPreCheck(t)
-		},
-		Providers:    testAccProviders,
-		CheckDestroy: testAccResourceVSphereComputeClusterCheckExists(false),
-		Steps: []resource.TestStep{
-			{
-				Config: testAccResourceVSphereComputeClusterConfigEmpty(),
-				Check: resource.ComposeTestCheckFunc(
-					testAccResourceVSphereComputeClusterCheckExists(true),
-				),
-			},
 			{
 				ResourceName:      "vsphere_compute_cluster.compute_cluster",
 				ImportState:       true,
@@ -67,7 +48,8 @@ func TestAccResourceVSphereComputeCluster_import(t *testing.T) {
 					}
 					return cluster.InventoryPath, nil
 				},
-				Config: testAccResourceVSphereComputeClusterConfigEmpty(),
+				ImportStateVerifyIgnore: []string{"force_evacuate_on_destroy"},
+				Config: testAccResourceVSphereComputeClusterConfigBasic(),
 				Check: resource.ComposeTestCheckFunc(
 					testAccResourceVSphereComputeClusterCheckExists(true),
 				),
