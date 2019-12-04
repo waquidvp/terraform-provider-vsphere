@@ -62,7 +62,7 @@ jobs:
     - run:
         name: "revert snapshot"
         command: |
-          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/esxi_restore_snapshot.sh
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/revert_snapshot.sh
   test_acc_Client:
     docker:
     - image: circleci/golang:1.13
