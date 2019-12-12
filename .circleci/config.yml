@@ -5082,21 +5082,9 @@ workflows:
     jobs:
       - linters
       - build
-      - TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2:
-          requires:
-            - build
-      - TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2
-      - TestAccResourceVSphereVirtualMachine_migrateStateV2:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1
-      - TestAccResourceVSphereVirtualMachineSnapshot_basic:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_migrateStateV2
       - TestAccResourceVSphereVirtualMachine_basic:
           requires:
-          - TestAccResourceVSphereVirtualMachineSnapshot_basic
+          - build
       - TestAccResourceVSphereVirtualMachine_ignoreValidationOnComputedValue:
           requires:
           - TestAccResourceVSphereVirtualMachine_basic
