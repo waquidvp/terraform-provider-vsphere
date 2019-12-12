@@ -5082,7 +5082,7 @@ workflows:
       - linters
       - build
       - revert_snapshot
-      - TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2
+      - TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2:
         requires:
             - revert_snapshot
       - TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1:
