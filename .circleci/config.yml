@@ -1435,6 +1435,3487 @@ jobs:
         command: |
           $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh ResourceVSphereVmfsDatastore
 
+          
+### Virtual Machine Tests
+  TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_migrateStateV2:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV2
+
+
+ 
+  TestAccResourceVSphereVirtualMachineSnapshot_basic:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachineSnapshot_basic
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_basic:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_basic
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_ignoreValidationOnComputedValue:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_ignoreValidationOnComputedValue
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_highLatencySensitivity:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highLatencySensitivity
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_datastoreClusterCreate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_datastoreClusterCreateMultiDisk:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreateMultiDisk
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_datastoreClusterCreateUpdate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreateUpdate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_ESXiOnly:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_ESXiOnly
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_shutdownOK:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_shutdownOK
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_reCreateOnDeletion:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_reCreateOnDeletion
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_multiDevice:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multiDevice
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_addDevices:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_addDevices
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_removeMiddleDevices:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_removeMiddleDevices
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_removeMiddleDevicesChangeDiskUnit:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_removeMiddleDevicesChangeDiskUnit
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_highDiskUnitNumbers:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitNumbers
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_highDiskUnitInsufficientBus:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitInsufficientBus
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_highDiskUnitsToRegularSingleController:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitsToRegularSingleController
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_scsiBusSharing:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharing
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_scsiBusSharingUpdate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharingUpdate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_scsiBusSharingMultiVM:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharingMultiVM
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_disksKeepOnRemove:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_disksKeepOnRemove
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cdromComputedValue:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromComputedValue
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cdromIsoMapping:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromIsoMapping
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cdromClientMapping:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromClientMapping
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppIsoBasic:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoBasic
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppIsoNoVApp:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoNoVApp
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppIsoNoCdrom:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoNoCdrom
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppIsoIncorrectCdromType:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoIncorrectCdromType
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppIsoConfigIsoIgnored:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoConfigIsoIgnored
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppIsoChangeCdromBacking:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoChangeCdromBacking
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppIsoPoweredOffCdromRead:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoPoweredOffCdromRead
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cdromClientMappingClone:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromClientMappingClone
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cdromNoParameters:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromNoParameters
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cdromConflictingParameters:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromConflictingParameters
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cdromChangeMapping:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromChangeMapping
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_maximumNumberOfNICs:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_maximumNumberOfNICs
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_upgradeCPUAndRam:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_upgradeCPUAndRam
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_modifyAnnotation:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_modifyAnnotation
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_growDisk:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_growDisk
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_swapSCSIBus:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_swapSCSIBus
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_extraConfig:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_extraConfig
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_extraConfigSwapKeys:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_extraConfigSwapKeys
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_attachExistingVmdk:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_attachExistingVmdk
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_attachExistingVmdkTaint:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_attachExistingVmdkTaint
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_resourcePoolMove:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_resourcePoolMove
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppContainerAndFolder:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppContainerAndFolder
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_vAppContainerMove:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppContainerMove
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_inFolder:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_inFolder
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_moveToFolder:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_moveToFolder
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_staticMAC:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_staticMAC
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_singleTag:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_singleTag
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_multipleTags:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multipleTags
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_switchTags:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_switchTags
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_renamedDiskInPlaceOfExisting:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_renamedDiskInPlaceOfExisting
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_blockComputedDiskName:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockComputedDiskName
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClones:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClones
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClonesAfterCreation:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClonesAfterCreation
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_blockDiskLabelStartingWithOrphanedPrefix:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockDiskLabelStartingWithOrphanedPrefix
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_createIntoEmptyClusterNoEnvironmentBrowser:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_createIntoEmptyClusterNoEnvironmentBrowser
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneFromTemplate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneFromTemplate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_clonePoweredOn:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_clonePoweredOn
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneNoGateway:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneNoGateway
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneCustomizeWithNewResourcePool:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeWithNewResourcePool
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneCustomizeComputedValue:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeComputedValue
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNew:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNew
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNewWithDatastore:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNewWithDatastore
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_datastoreClusterClone:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterClone
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneModifyDiskAndSCSITypeAtSameTime:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneModifyDiskAndSCSITypeAtSameTime
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneMultiNICFromSingleNICTemplate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneMultiNICFromSingleNICTemplate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithDifferentTimezone:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithDifferentTimezone
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneBlockESXi:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneBlockESXi
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithBadTimezone:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadTimezone
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithBadEagerlyScrubWithLinkedClone:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadEagerlyScrubWithLinkedClone
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithLinkedClone:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithLinkedClone
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithoutLinkedClone:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithoutLinkedClone
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnCreate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnCreate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnUpdate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnUpdate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneIntoEmptyCluster:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneIntoEmptyCluster
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithDifferentHostname:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithDifferentHostname
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithExtraDisks:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithExtraDisks
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithCdrom:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithCdrom
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithVAppProperties:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithVAppProperties
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertyNotSet:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertyNotSet
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertySet:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertySet
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnCreate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnCreate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnUpdate:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnUpdate
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cpuHotAdd:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cpuHotAdd
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_memoryHotAdd:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_memoryHotAdd
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_dualStackIPv4AndIPv6:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_dualStackIPv4AndIPv6
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_IPv6Only:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_IPv6Only
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_windowsTemplateCustomizationEventsAndProperIP:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_windowsTemplateCustomizationEventsAndProperIP
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_hostCheck:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostCheck
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_hostVMotion:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostVMotion
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_resourcePoolVMotion:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_resourcePoolVMotion
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_clusterVMotion:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_clusterVMotion
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_storageVMotionGlobalSetting:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionGlobalSetting
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_storageVMotionSingleDisk:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionSingleDisk
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_storageVMotionPinDatastore:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionPinDatastore
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_storageVMotionRenamedVirtualMachine:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionRenamedVirtualMachine
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_storageVMotionLinkedClones:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionLinkedClones
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_storageVMotionBlockExternallyAttachedDisks:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionBlockExternallyAttachedDisks
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreCluster:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreCluster
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_hostVMotionDatastoreCluster:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostVMotionDatastoreCluster
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreClusterSingleDisk:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreClusterSingleDisk
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_singleCustomAttribute:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_singleCustomAttribute
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_multiCustomAttribute:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multiCustomAttribute
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_switchCustomAttribute:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_switchCustomAttribute
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_transitionToLabel:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_transitionToLabel
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_preventRevertToName:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_preventRevertToName
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_transitionToLabelAttachedDisk:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_transitionToLabelAttachedDisk
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_multipleDisksAtDifferentSCSISlotsImport:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multipleDisksAtDifferentSCSISlotsImport
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_cloneImport:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneImport
+
+
+ 
+  TestAccResourceVSphereVirtualMachine_readVappChildResourcePool:
+    docker:
+    - image: circleci/golang:1.13
+    working_directory: /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere
+    steps:
+    - checkout
+    - run:
+        name: Move to GOPATH
+        command: |
+          mkdir -p /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+          mv /home/circleci/src/github.com/terraform-providers/terraform-provider-vsphere/* /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere
+    - add_ssh_keys:
+        fingerprints:
+          - 62:4d:8d:04:48:f7:0f:5a:63:da:de:a6:30:f4:b4:12
+    - run:
+        name: SSH Tunnel
+        command: |
+          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+    - run:
+        name: Get GOVC
+        command: |
+          go get -u github.com/vmware/govmomi/govc
+    - run:
+        no_output_timeout: 90m
+        name: Run Acceptance Tests
+        command: |
+          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_readVappChildResourcePool
+
+
 workflows:
   version: 2
   nightly:
@@ -1601,150 +5082,351 @@ workflows:
       - linters
       - build
       - revert_snapshot
-      - test_acc_Client:
-          requires:
+      - TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2
+        requires:
             - revert_snapshot
-      - test_acc_DataSourceVSphereComputeCluster:
-          requires:
-            - test_acc_Client
-      - test_acc_DataSourceVSphereCustomAttribute:
-          requires:
-            - test_acc_DataSourceVSphereComputeCluster
-      - test_acc_DataSourceVSphereDatacenter:
-          requires:
-            - test_acc_DataSourceVSphereCustomAttribute
-      - test_acc_DataSourceVSphereDatastore:
-          requires:
-            - test_acc_DataSourceVSphereDatacenter
-      - test_acc_DataSourceVSphereDatastoreCluster:
-          requires:
-            - test_acc_DataSourceVSphereDatastore
-      - test_acc_DataSourceVSphereDistributedVirtualSwitch:
-          requires:
-            - test_acc_DataSourceVSphereDatastoreCluster
-      - test_acc_DataSourceVSphereFolder:
-          requires:
-            - test_acc_DataSourceVSphereDistributedVirtualSwitch
-      - test_acc_DataSourceVSphereHost:
-          requires:
-            - test_acc_DataSourceVSphereFolder
-      - test_acc_DataSourceVSphereNetwork:
-          requires:
-            - test_acc_DataSourceVSphereHost
-      - test_acc_DataSourceVSphereResourcePool:
-          requires:
-            - test_acc_DataSourceVSphereNetwork
-      - test_acc_DataSourceVSphereTag:
-          requires:
-            - test_acc_DataSourceVSphereResourcePool
-      - test_acc_DataSourceVSphereTagCategory:
-          requires:
-            - test_acc_DataSourceVSphereTag
-      - test_acc_DataSourceVSphereVAppContainer:
-          requires:
-            - test_acc_DataSourceVSphereTagCategory
-      - test_acc_DataSourceVSphereVirtualMachine:
-          requires:
-            - test_acc_DataSourceVSphereVAppContainer
-      - test_acc_DataSourceVSphereVmfsDisks:
-          requires:
-            - test_acc_DataSourceVSphereVirtualMachine
-      - test_acc_ResourceVSphereComputeCluster:
-          requires:
-            - test_acc_DataSourceVSphereVmfsDisks
-      - test_acc_ResourceVSphereComputeClusterHostGroup:
-          requires:
-            - test_acc_ResourceVSphereComputeCluster
-      - test_acc_ResourceVSphereComputeClusterVMAffinityRule:
-          requires:
-            - test_acc_ResourceVSphereComputeClusterHostGroup
-      - test_acc_ResourceVSphereComputeClusterVMAntiAffinityRule:
-          requires:
-            - test_acc_ResourceVSphereComputeClusterVMAffinityRule
-      - test_acc_ResourceVSphereComputeClusterVMDependencyRule:
-          requires:
-            - test_acc_ResourceVSphereComputeClusterVMAntiAffinityRule
-      - test_acc_ResourceVSphereComputeClusterVMGroup:
-          requires:
-            - test_acc_ResourceVSphereComputeClusterVMDependencyRule
-      - test_acc_ResourceVSphereComputeClusterVMHostRule:
-          requires:
-            - test_acc_ResourceVSphereComputeClusterVMGroup
-      - test_acc_ResourceVSphereCustomAttribute:
-          requires:
-            - test_acc_ResourceVSphereComputeClusterVMHostRule
-      - test_acc_ResourceVSphereDatacenter:
-          requires:
-            - test_acc_ResourceVSphereCustomAttribute
-      - test_acc_ResourceVSphereDatastoreCluster:
-          requires:
-            - test_acc_ResourceVSphereDatacenter
-      - test_acc_ResourceVSphereDatastoreClusterVMAntiAffinityRule:
-          requires:
-            - test_acc_ResourceVSphereDatastoreCluster
-      - test_acc_ResourceVSphereDistributedPortGroup:
-          requires:
-            - test_acc_ResourceVSphereDatastoreClusterVMAntiAffinityRule
-      - test_acc_ResourceVSphereDistributedVirtualSwitch:
-          requires:
-            - test_acc_ResourceVSphereDistributedPortGroup
-      - test_acc_ResourceVSphereDPMHostOverride:
-          requires:
-            - test_acc_ResourceVSphereDistributedVirtualSwitch
-      - test_acc_ResourceVSphereDRSVMOverride:
-          requires:
-            - test_acc_ResourceVSphereDPMHostOverride
-      - test_acc_ResourceVSphereFile:
-          requires:
-            - test_acc_ResourceVSphereDRSVMOverride
-      - test_acc_ResourceVSphereFolder:
-          requires:
-            - test_acc_ResourceVSphereFile
-      - test_acc_ResourceVSphereHAVMOverride:
-          requires:
-            - test_acc_ResourceVSphereFolder
-      - test_acc_ResourceVSphereHost:
-          requires:
-            - test_acc_ResourceVSphereHAVMOverride
-      - test_acc_ResourceVSphereHostPortGroup:
-          requires:
-            - test_acc_ResourceVSphereHost
-      - test_acc_ResourceVSphereHostVirtualSwitch:
-          requires:
-            - test_acc_ResourceVSphereHostPortGroup
-      - test_acc_ResourceVSphereLicense:
-          requires:
-            - test_acc_ResourceVSphereHostVirtualSwitch
-      - test_acc_ResourceVSphereNasDatastore:
-          requires:
-            - test_acc_ResourceVSphereLicense
-      - test_acc_ResourceVSphereResourcePool:
-          requires:
-            - test_acc_ResourceVSphereNasDatastore
-      - test_acc_ResourceVSphereStorageDrsVMOverride:
-          requires:
-            - test_acc_ResourceVSphereResourcePool
-      - test_acc_ResourceVSphereTag:
-          requires:
-            - test_acc_ResourceVSphereStorageDrsVMOverride
-      - test_acc_ResourceVSphereTagCategory:
-          requires:
-            - test_acc_ResourceVSphereTag
-      - test_acc_ResourceVSphereVAppContainer:
-          requires:
-            - test_acc_ResourceVSphereTagCategory
-      - test_acc_ResourceVSphereVAppEntity:
-          requires:
-            - test_acc_ResourceVSphereVAppContainer
-      - test_acc_ResourceVSphereVirtualDisk:
-          requires:
-            - test_acc_ResourceVSphereVAppEntity
-      - test_acc_ResourceVSphereVirtualMachineSnapshot:
-          requires:
-            - test_acc_ResourceVSphereVirtualDisk
-      - test_acc_ResourceVSphereVmfsDatastore:
-          requires:
-            - test_acc_ResourceVSphereVirtualMachineSnapshot
-      - test_acc_ResourceVSphereVirtualMachine:
-          requires:
-            - test_acc_ResourceVSphereVmfsDatastore
+      - TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2
+      - TestAccResourceVSphereVirtualMachine_migrateStateV2:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1
+      - TestAccResourceVSphereVirtualMachineSnapshot_basic:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_migrateStateV2
+      - TestAccResourceVSphereVirtualMachine_basic:
+        requires:
+          - TestAccResourceVSphereVirtualMachineSnapshot_basic
+      - TestAccResourceVSphereVirtualMachine_ignoreValidationOnComputedValue:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_basic
+      - TestAccResourceVSphereVirtualMachine_highLatencySensitivity:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_ignoreValidationOnComputedValue
+      - TestAccResourceVSphereVirtualMachine_datastoreClusterCreate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_highLatencySensitivity
+      - TestAccResourceVSphereVirtualMachine_datastoreClusterCreateMultiDisk:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_datastoreClusterCreate
+      - TestAccResourceVSphereVirtualMachine_datastoreClusterCreateUpdate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_datastoreClusterCreateMultiDisk
+      - TestAccResourceVSphereVirtualMachine_ESXiOnly:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_datastoreClusterCreateUpdate
+      - TestAccResourceVSphereVirtualMachine_shutdownOK:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_ESXiOnly
+      - TestAccResourceVSphereVirtualMachine_reCreateOnDeletion:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_shutdownOK
+      - TestAccResourceVSphereVirtualMachine_multiDevice:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_reCreateOnDeletion
+      - TestAccResourceVSphereVirtualMachine_addDevices:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_multiDevice
+      - TestAccResourceVSphereVirtualMachine_removeMiddleDevices:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_addDevices
+      - TestAccResourceVSphereVirtualMachine_removeMiddleDevicesChangeDiskUnit:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_removeMiddleDevices
+      - TestAccResourceVSphereVirtualMachine_highDiskUnitNumbers:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_removeMiddleDevicesChangeDiskUnit
+      - TestAccResourceVSphereVirtualMachine_highDiskUnitInsufficientBus:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_highDiskUnitNumbers
+      - TestAccResourceVSphereVirtualMachine_highDiskUnitsToRegularSingleController:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_highDiskUnitInsufficientBus
+      - TestAccResourceVSphereVirtualMachine_scsiBusSharing:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_highDiskUnitsToRegularSingleController
+      - TestAccResourceVSphereVirtualMachine_scsiBusSharingUpdate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_scsiBusSharing
+      - TestAccResourceVSphereVirtualMachine_scsiBusSharingMultiVM:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_scsiBusSharingUpdate
+      - TestAccResourceVSphereVirtualMachine_disksKeepOnRemove:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_scsiBusSharingMultiVM
+      - TestAccResourceVSphereVirtualMachine_cdromComputedValue:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_disksKeepOnRemove
+      - TestAccResourceVSphereVirtualMachine_cdromIsoMapping:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cdromComputedValue
+      - TestAccResourceVSphereVirtualMachine_cdromClientMapping:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cdromIsoMapping
+      - TestAccResourceVSphereVirtualMachine_vAppIsoBasic:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cdromClientMapping
+      - TestAccResourceVSphereVirtualMachine_vAppIsoNoVApp:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppIsoBasic
+      - TestAccResourceVSphereVirtualMachine_vAppIsoNoCdrom:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppIsoNoVApp
+      - TestAccResourceVSphereVirtualMachine_vAppIsoIncorrectCdromType:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppIsoNoCdrom
+      - TestAccResourceVSphereVirtualMachine_vAppIsoConfigIsoIgnored:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppIsoIncorrectCdromType
+      - TestAccResourceVSphereVirtualMachine_vAppIsoChangeCdromBacking:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppIsoConfigIsoIgnored
+      - TestAccResourceVSphereVirtualMachine_vAppIsoPoweredOffCdromRead:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppIsoChangeCdromBacking
+      - TestAccResourceVSphereVirtualMachine_cdromClientMappingClone:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppIsoPoweredOffCdromRead
+      - TestAccResourceVSphereVirtualMachine_cdromNoParameters:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cdromClientMappingClone
+      - TestAccResourceVSphereVirtualMachine_cdromConflictingParameters:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cdromNoParameters
+      - TestAccResourceVSphereVirtualMachine_cdromChangeMapping:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cdromConflictingParameters
+      - TestAccResourceVSphereVirtualMachine_maximumNumberOfNICs:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cdromChangeMapping
+      - TestAccResourceVSphereVirtualMachine_upgradeCPUAndRam:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_maximumNumberOfNICs
+      - TestAccResourceVSphereVirtualMachine_modifyAnnotation:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_upgradeCPUAndRam
+      - TestAccResourceVSphereVirtualMachine_growDisk:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_modifyAnnotation
+      - TestAccResourceVSphereVirtualMachine_swapSCSIBus:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_growDisk
+      - TestAccResourceVSphereVirtualMachine_extraConfig:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_swapSCSIBus
+      - TestAccResourceVSphereVirtualMachine_extraConfigSwapKeys:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_extraConfig
+      - TestAccResourceVSphereVirtualMachine_attachExistingVmdk:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_extraConfigSwapKeys
+      - TestAccResourceVSphereVirtualMachine_attachExistingVmdkTaint:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_attachExistingVmdk
+      - TestAccResourceVSphereVirtualMachine_resourcePoolMove:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_attachExistingVmdkTaint
+      - TestAccResourceVSphereVirtualMachine_vAppContainerAndFolder:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_resourcePoolMove
+      - TestAccResourceVSphereVirtualMachine_vAppContainerMove:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppContainerAndFolder
+      - TestAccResourceVSphereVirtualMachine_inFolder:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_vAppContainerMove
+      - TestAccResourceVSphereVirtualMachine_moveToFolder:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_inFolder
+      - TestAccResourceVSphereVirtualMachine_staticMAC:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_moveToFolder
+      - TestAccResourceVSphereVirtualMachine_singleTag:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_staticMAC
+      - TestAccResourceVSphereVirtualMachine_multipleTags:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_singleTag
+      - TestAccResourceVSphereVirtualMachine_switchTags:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_multipleTags
+      - TestAccResourceVSphereVirtualMachine_renamedDiskInPlaceOfExisting:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_switchTags
+      - TestAccResourceVSphereVirtualMachine_blockComputedDiskName:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_renamedDiskInPlaceOfExisting
+      - TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClones:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_blockComputedDiskName
+      - TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClonesAfterCreation:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClones
+      - TestAccResourceVSphereVirtualMachine_blockDiskLabelStartingWithOrphanedPrefix:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClonesAfterCreation
+      - TestAccResourceVSphereVirtualMachine_createIntoEmptyClusterNoEnvironmentBrowser:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_blockDiskLabelStartingWithOrphanedPrefix
+      - TestAccResourceVSphereVirtualMachine_cloneFromTemplate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_createIntoEmptyClusterNoEnvironmentBrowser
+      - TestAccResourceVSphereVirtualMachine_clonePoweredOn:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneFromTemplate
+      - TestAccResourceVSphereVirtualMachine_cloneNoGateway:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_clonePoweredOn
+      - TestAccResourceVSphereVirtualMachine_cloneCustomizeWithNewResourcePool:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneNoGateway
+      - TestAccResourceVSphereVirtualMachine_cloneCustomizeComputedValue:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneCustomizeWithNewResourcePool
+      - TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNew:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneCustomizeComputedValue
+      - TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNewWithDatastore:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNew
+      - TestAccResourceVSphereVirtualMachine_datastoreClusterClone:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNewWithDatastore
+      - TestAccResourceVSphereVirtualMachine_cloneModifyDiskAndSCSITypeAtSameTime:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_datastoreClusterClone
+      - TestAccResourceVSphereVirtualMachine_cloneMultiNICFromSingleNICTemplate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneModifyDiskAndSCSITypeAtSameTime
+      - TestAccResourceVSphereVirtualMachine_cloneWithDifferentTimezone:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneMultiNICFromSingleNICTemplate
+      - TestAccResourceVSphereVirtualMachine_cloneBlockESXi:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithDifferentTimezone
+      - TestAccResourceVSphereVirtualMachine_cloneWithBadTimezone:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneBlockESXi
+      - TestAccResourceVSphereVirtualMachine_cloneWithBadEagerlyScrubWithLinkedClone:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithBadTimezone
+      - TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithLinkedClone:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithBadEagerlyScrubWithLinkedClone
+      - TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithoutLinkedClone:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithLinkedClone
+      - TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnCreate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithoutLinkedClone
+      - TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnUpdate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnCreate
+      - TestAccResourceVSphereVirtualMachine_cloneIntoEmptyCluster:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnUpdate
+      - TestAccResourceVSphereVirtualMachine_cloneWithDifferentHostname:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneIntoEmptyCluster
+      - TestAccResourceVSphereVirtualMachine_cloneWithExtraDisks:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithDifferentHostname
+      - TestAccResourceVSphereVirtualMachine_cloneWithCdrom:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithExtraDisks
+      - TestAccResourceVSphereVirtualMachine_cloneWithVAppProperties:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithCdrom
+      - TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertyNotSet:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithVAppProperties
+      - TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertySet:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertyNotSet
+      - TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnCreate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertySet
+      - TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnUpdate:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnCreate
+      - TestAccResourceVSphereVirtualMachine_cpuHotAdd:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnUpdate
+      - TestAccResourceVSphereVirtualMachine_memoryHotAdd:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_cpuHotAdd
+      - TestAccResourceVSphereVirtualMachine_dualStackIPv4AndIPv6:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_memoryHotAdd
+      - TestAccResourceVSphereVirtualMachine_IPv6Only:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_dualStackIPv4AndIPv6
+      - TestAccResourceVSphereVirtualMachine_windowsTemplateCustomizationEventsAndProperIP:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_IPv6Only
+      - TestAccResourceVSphereVirtualMachine_hostCheck:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_windowsTemplateCustomizationEventsAndProperIP
+      - TestAccResourceVSphereVirtualMachine_hostVMotion:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_hostCheck
+      - TestAccResourceVSphereVirtualMachine_resourcePoolVMotion:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_hostVMotion
+      - TestAccResourceVSphereVirtualMachine_clusterVMotion:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_resourcePoolVMotion
+      - TestAccResourceVSphereVirtualMachine_storageVMotionGlobalSetting:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_clusterVMotion
+      - TestAccResourceVSphereVirtualMachine_storageVMotionSingleDisk:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_storageVMotionGlobalSetting
+      - TestAccResourceVSphereVirtualMachine_storageVMotionPinDatastore:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_storageVMotionSingleDisk
+      - TestAccResourceVSphereVirtualMachine_storageVMotionRenamedVirtualMachine:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_storageVMotionPinDatastore
+      - TestAccResourceVSphereVirtualMachine_storageVMotionLinkedClones:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_storageVMotionRenamedVirtualMachine
+      - TestAccResourceVSphereVirtualMachine_storageVMotionBlockExternallyAttachedDisks:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_storageVMotionLinkedClones
+      - TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreCluster:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_storageVMotionBlockExternallyAttachedDisks
+      - TestAccResourceVSphereVirtualMachine_hostVMotionDatastoreCluster:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreCluster
+      - TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreClusterSingleDisk:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_hostVMotionDatastoreCluster
+      - TestAccResourceVSphereVirtualMachine_singleCustomAttribute:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreClusterSingleDisk
+      - TestAccResourceVSphereVirtualMachine_multiCustomAttribute:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_singleCustomAttribute
+      - TestAccResourceVSphereVirtualMachine_switchCustomAttribute:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_multiCustomAttribute
+      - TestAccResourceVSphereVirtualMachine_transitionToLabel:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_switchCustomAttribute
+      - TestAccResourceVSphereVirtualMachine_preventRevertToName:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_transitionToLabel
+      - TestAccResourceVSphereVirtualMachine_transitionToLabelAttachedDisk:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_preventRevertToName
+      - TestAccResourceVSphereVirtualMachine_multipleDisksAtDifferentSCSISlotsImport:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_transitionToLabelAttachedDisk
+      - TestAccResourceVSphereVirtualMachine_cloneImport:
+        requires:
+          - TestAccResourceVSphereVirtualMachine_multipleDisksAtDifferentSCSISlotsImport
+      - TestAccResourceVSphereVirtualMachine_readVappChildResourcePool:
+        requires:
+ 
