@@ -18,6 +18,7 @@ runTest () {
     res=$(TF_ACC=1 go test github.com/terraform-providers/terraform-provider-vsphere/vsphere -v -count=1 -run="$1\$" -timeout 240m)
     if grep PASS <<< "$res" &> /dev/null; then
       eCode=0
+      break
     else
       echo "test failed. reverting"
       revertAndWait
