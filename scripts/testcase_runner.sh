@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e -u -o pipefail
-
+set -x
 main () {
   eCode=0
   set +e
@@ -19,9 +19,11 @@ runTest () {
     if grep PASS <<< "$res" &> /dev/null; then
       eCode=0
     else
+      echo "test failed. reverting"
       revertAndWait
       sleep 30
       eCode=1
+      echo "output was:\n$res"
     fi
   done
   echo "$res"
@@ -33,8 +35,9 @@ revertAndWait () {
   $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/esxi_restore_snapshot.sh $VSPHERE_ESXI_SNAPSHOT
   sleep 30
   until curl -k "https://$VSPHERE_SERVER/rest/vcenter/datacenter" -i -m 10 2> /dev/null | grep "401 Unauthorized" &> /dev/null; do
-    sleep 30
+    echo -n . ;sleep 30
   done
+  echo ' Done!'
 }
 
 main $1
