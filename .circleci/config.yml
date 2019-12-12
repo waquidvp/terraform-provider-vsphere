@@ -1454,7 +1454,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1484,7 +1484,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1514,7 +1514,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1544,7 +1544,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1574,7 +1574,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1604,7 +1604,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1634,7 +1634,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1664,7 +1664,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1694,7 +1694,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1724,7 +1724,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1754,7 +1754,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1784,7 +1784,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1814,7 +1814,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1844,7 +1844,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1874,7 +1874,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1904,7 +1904,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1934,7 +1934,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1964,7 +1964,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -1994,7 +1994,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2024,7 +2024,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2054,7 +2054,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2084,7 +2084,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2114,7 +2114,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2144,7 +2144,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2174,7 +2174,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2204,7 +2204,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2234,7 +2234,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2264,7 +2264,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2294,7 +2294,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2324,7 +2324,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2354,7 +2354,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2384,7 +2384,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2414,7 +2414,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2444,7 +2444,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2474,7 +2474,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2504,7 +2504,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2534,7 +2534,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2564,7 +2564,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2594,7 +2594,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2624,7 +2624,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2654,7 +2654,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2684,7 +2684,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2714,7 +2714,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2744,7 +2744,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2774,7 +2774,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2804,7 +2804,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2834,7 +2834,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2864,7 +2864,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2894,7 +2894,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2924,7 +2924,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2954,7 +2954,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -2984,7 +2984,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3014,7 +3014,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3044,7 +3044,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3074,7 +3074,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3104,7 +3104,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3134,7 +3134,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3164,7 +3164,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3194,7 +3194,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3224,7 +3224,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3254,7 +3254,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3284,7 +3284,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3314,7 +3314,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3344,7 +3344,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3374,7 +3374,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3404,7 +3404,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3434,7 +3434,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3464,7 +3464,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3494,7 +3494,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3524,7 +3524,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3554,7 +3554,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3584,7 +3584,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3614,7 +3614,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3644,7 +3644,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3674,7 +3674,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3704,7 +3704,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3734,7 +3734,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3764,7 +3764,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3794,7 +3794,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3824,7 +3824,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3854,7 +3854,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3884,7 +3884,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3914,7 +3914,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3944,7 +3944,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -3974,7 +3974,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4004,7 +4004,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4034,7 +4034,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4064,7 +4064,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4094,7 +4094,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4124,7 +4124,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4154,7 +4154,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4184,7 +4184,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4214,7 +4214,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4244,7 +4244,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4274,7 +4274,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4304,7 +4304,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4334,7 +4334,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4364,7 +4364,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4394,7 +4394,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4424,7 +4424,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4454,7 +4454,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4484,7 +4484,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4514,7 +4514,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4544,7 +4544,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4574,7 +4574,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4604,7 +4604,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4634,7 +4634,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4664,7 +4664,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4694,7 +4694,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4724,7 +4724,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4754,7 +4754,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4784,7 +4784,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4814,7 +4814,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4844,7 +4844,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4874,7 +4874,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4904,7 +4904,7 @@ jobs:
     - run:
         name: SSH Tunnel
         command: |
-          ssh @ -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
+          ssh $TUNNEL_USER@$TUNNEL_HOST -L 4430:vcenter.vsphere.hashicorptest.internal:443 -L 4431:esxi1.vsphere.hashicorptest.internal:443 -o StrictHostKeyChecking=no -f sleep 32400
     - run:
         name: Get GOVC
         command: |
@@ -4914,6 +4914,7 @@ jobs:
         name: Run Acceptance Tests
         command: |
           $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_readVappChildResourcePool
+
 
 
 workflows:
@@ -5081,10 +5082,9 @@ workflows:
     jobs:
       - linters
       - build
-      - revert_snapshot
       - TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2:
           requires:
-            - revert_snapshot
+            - build
       - TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1:
           requires:
           - TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2
