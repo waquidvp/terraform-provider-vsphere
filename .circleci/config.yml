@@ -1437,6 +1437,7 @@ jobs:
 
           
 ### Virtual Machine Tests
+ 
   TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2:
     docker:
     - image: circleci/golang:1.13
@@ -1463,7 +1464,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV3_fromV2
 
 
  
@@ -1493,7 +1494,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV3FromV1
 
 
  
@@ -1523,7 +1524,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV2
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_migrateStateV2
 
 
  
@@ -1553,7 +1554,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachineSnapshot_basic
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachineSnapshot_basic
 
 
  
@@ -1583,7 +1584,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_basic
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_basic
 
 
  
@@ -1613,7 +1614,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_ignoreValidationOnComputedValue
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_ignoreValidationOnComputedValue
 
 
  
@@ -1643,7 +1644,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highLatencySensitivity
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highLatencySensitivity
 
 
  
@@ -1673,7 +1674,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreate
 
 
  
@@ -1703,7 +1704,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreateMultiDisk
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreateMultiDisk
 
 
  
@@ -1733,7 +1734,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreateUpdate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterCreateUpdate
 
 
  
@@ -1763,7 +1764,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_ESXiOnly
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_ESXiOnly
 
 
  
@@ -1793,7 +1794,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_shutdownOK
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_shutdownOK
 
 
  
@@ -1823,7 +1824,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_reCreateOnDeletion
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_reCreateOnDeletion
 
 
  
@@ -1853,7 +1854,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multiDevice
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multiDevice
 
 
  
@@ -1883,7 +1884,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_addDevices
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_addDevices
 
 
  
@@ -1913,7 +1914,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_removeMiddleDevices
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_removeMiddleDevices
 
 
  
@@ -1943,7 +1944,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_removeMiddleDevicesChangeDiskUnit
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_removeMiddleDevicesChangeDiskUnit
 
 
  
@@ -1973,7 +1974,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitNumbers
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitNumbers
 
 
  
@@ -2003,7 +2004,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitInsufficientBus
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitInsufficientBus
 
 
  
@@ -2033,7 +2034,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitsToRegularSingleController
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_highDiskUnitsToRegularSingleController
 
 
  
@@ -2063,7 +2064,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharing
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharing
 
 
  
@@ -2093,7 +2094,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharingUpdate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharingUpdate
 
 
  
@@ -2123,7 +2124,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharingMultiVM
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_scsiBusSharingMultiVM
 
 
  
@@ -2153,7 +2154,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_disksKeepOnRemove
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_disksKeepOnRemove
 
 
  
@@ -2183,7 +2184,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromComputedValue
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromComputedValue
 
 
  
@@ -2213,7 +2214,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromIsoMapping
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromIsoMapping
 
 
  
@@ -2243,7 +2244,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromClientMapping
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromClientMapping
 
 
  
@@ -2273,7 +2274,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoBasic
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoBasic
 
 
  
@@ -2303,7 +2304,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoNoVApp
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoNoVApp
 
 
  
@@ -2333,7 +2334,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoNoCdrom
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoNoCdrom
 
 
  
@@ -2363,7 +2364,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoIncorrectCdromType
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoIncorrectCdromType
 
 
  
@@ -2393,7 +2394,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoConfigIsoIgnored
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoConfigIsoIgnored
 
 
  
@@ -2423,7 +2424,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoChangeCdromBacking
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoChangeCdromBacking
 
 
  
@@ -2453,7 +2454,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoPoweredOffCdromRead
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppIsoPoweredOffCdromRead
 
 
  
@@ -2483,7 +2484,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromClientMappingClone
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromClientMappingClone
 
 
  
@@ -2513,7 +2514,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromNoParameters
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromNoParameters
 
 
  
@@ -2543,7 +2544,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromConflictingParameters
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromConflictingParameters
 
 
  
@@ -2573,7 +2574,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromChangeMapping
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cdromChangeMapping
 
 
  
@@ -2603,7 +2604,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_maximumNumberOfNICs
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_maximumNumberOfNICs
 
 
  
@@ -2633,7 +2634,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_upgradeCPUAndRam
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_upgradeCPUAndRam
 
 
  
@@ -2663,7 +2664,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_modifyAnnotation
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_modifyAnnotation
 
 
  
@@ -2693,7 +2694,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_growDisk
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_growDisk
 
 
  
@@ -2723,7 +2724,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_swapSCSIBus
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_swapSCSIBus
 
 
  
@@ -2753,7 +2754,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_extraConfig
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_extraConfig
 
 
  
@@ -2783,7 +2784,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_extraConfigSwapKeys
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_extraConfigSwapKeys
 
 
  
@@ -2813,7 +2814,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_attachExistingVmdk
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_attachExistingVmdk
 
 
  
@@ -2843,7 +2844,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_attachExistingVmdkTaint
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_attachExistingVmdkTaint
 
 
  
@@ -2873,7 +2874,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_resourcePoolMove
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_resourcePoolMove
 
 
  
@@ -2903,7 +2904,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppContainerAndFolder
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppContainerAndFolder
 
 
  
@@ -2933,7 +2934,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppContainerMove
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_vAppContainerMove
 
 
  
@@ -2963,7 +2964,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_inFolder
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_inFolder
 
 
  
@@ -2993,7 +2994,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_moveToFolder
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_moveToFolder
 
 
  
@@ -3023,7 +3024,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_staticMAC
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_staticMAC
 
 
  
@@ -3053,7 +3054,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_singleTag
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_singleTag
 
 
  
@@ -3083,7 +3084,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multipleTags
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multipleTags
 
 
  
@@ -3113,7 +3114,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_switchTags
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_switchTags
 
 
  
@@ -3143,7 +3144,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_renamedDiskInPlaceOfExisting
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_renamedDiskInPlaceOfExisting
 
 
  
@@ -3173,7 +3174,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockComputedDiskName
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockComputedDiskName
 
 
  
@@ -3203,7 +3204,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClones
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClones
 
 
  
@@ -3233,7 +3234,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClonesAfterCreation
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockVAppSettingsOnNonClonesAfterCreation
 
 
  
@@ -3263,7 +3264,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockDiskLabelStartingWithOrphanedPrefix
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_blockDiskLabelStartingWithOrphanedPrefix
 
 
  
@@ -3293,7 +3294,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_createIntoEmptyClusterNoEnvironmentBrowser
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_createIntoEmptyClusterNoEnvironmentBrowser
 
 
  
@@ -3323,7 +3324,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneFromTemplate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneFromTemplate
 
 
  
@@ -3353,7 +3354,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_clonePoweredOn
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_clonePoweredOn
 
 
  
@@ -3383,7 +3384,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneNoGateway
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneNoGateway
 
 
  
@@ -3413,7 +3414,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeWithNewResourcePool
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeWithNewResourcePool
 
 
  
@@ -3443,7 +3444,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeComputedValue
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeComputedValue
 
 
  
@@ -3473,7 +3474,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNew
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNew
 
 
  
@@ -3503,7 +3504,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNewWithDatastore
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneCustomizeForceNewWithDatastore
 
 
  
@@ -3533,7 +3534,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterClone
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_datastoreClusterClone
 
 
  
@@ -3563,7 +3564,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneModifyDiskAndSCSITypeAtSameTime
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneModifyDiskAndSCSITypeAtSameTime
 
 
  
@@ -3593,7 +3594,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneMultiNICFromSingleNICTemplate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneMultiNICFromSingleNICTemplate
 
 
  
@@ -3623,7 +3624,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithDifferentTimezone
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithDifferentTimezone
 
 
  
@@ -3653,7 +3654,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneBlockESXi
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneBlockESXi
 
 
  
@@ -3683,7 +3684,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadTimezone
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadTimezone
 
 
  
@@ -3713,7 +3714,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadEagerlyScrubWithLinkedClone
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadEagerlyScrubWithLinkedClone
 
 
  
@@ -3743,7 +3744,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithLinkedClone
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithLinkedClone
 
 
  
@@ -3773,7 +3774,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithoutLinkedClone
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadSizeWithoutLinkedClone
 
 
  
@@ -3803,7 +3804,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnCreate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnCreate
 
 
  
@@ -3833,7 +3834,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnUpdate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneUnsupportedVAppPropertiesOnUpdate
 
 
  
@@ -3863,7 +3864,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneIntoEmptyCluster
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneIntoEmptyCluster
 
 
  
@@ -3893,7 +3894,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithDifferentHostname
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithDifferentHostname
 
 
  
@@ -3923,7 +3924,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithExtraDisks
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithExtraDisks
 
 
  
@@ -3953,7 +3954,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithCdrom
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithCdrom
 
 
  
@@ -3983,7 +3984,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithVAppProperties
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithVAppProperties
 
 
  
@@ -4013,7 +4014,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertyNotSet
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertyNotSet
 
 
  
@@ -4043,7 +4044,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertySet
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithNonUserVAppPropertySet
 
 
  
@@ -4073,7 +4074,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnCreate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnCreate
 
 
  
@@ -4103,7 +4104,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnUpdate
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneWithBadVAppPropertyOnUpdate
 
 
  
@@ -4133,7 +4134,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cpuHotAdd
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cpuHotAdd
 
 
  
@@ -4163,7 +4164,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_memoryHotAdd
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_memoryHotAdd
 
 
  
@@ -4193,7 +4194,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_dualStackIPv4AndIPv6
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_dualStackIPv4AndIPv6
 
 
  
@@ -4223,7 +4224,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_IPv6Only
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_IPv6Only
 
 
  
@@ -4253,7 +4254,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_windowsTemplateCustomizationEventsAndProperIP
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_windowsTemplateCustomizationEventsAndProperIP
 
 
  
@@ -4283,7 +4284,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostCheck
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostCheck
 
 
  
@@ -4313,7 +4314,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostVMotion
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostVMotion
 
 
  
@@ -4343,7 +4344,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_resourcePoolVMotion
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_resourcePoolVMotion
 
 
  
@@ -4373,7 +4374,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_clusterVMotion
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_clusterVMotion
 
 
  
@@ -4403,7 +4404,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionGlobalSetting
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionGlobalSetting
 
 
  
@@ -4433,7 +4434,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionSingleDisk
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionSingleDisk
 
 
  
@@ -4463,7 +4464,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionPinDatastore
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionPinDatastore
 
 
  
@@ -4493,7 +4494,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionRenamedVirtualMachine
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionRenamedVirtualMachine
 
 
  
@@ -4523,7 +4524,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionLinkedClones
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionLinkedClones
 
 
  
@@ -4553,7 +4554,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionBlockExternallyAttachedDisks
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionBlockExternallyAttachedDisks
 
 
  
@@ -4583,7 +4584,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreCluster
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreCluster
 
 
  
@@ -4613,7 +4614,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostVMotionDatastoreCluster
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_hostVMotionDatastoreCluster
 
 
  
@@ -4643,7 +4644,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreClusterSingleDisk
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreClusterSingleDisk
 
 
  
@@ -4673,7 +4674,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_singleCustomAttribute
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_singleCustomAttribute
 
 
  
@@ -4703,7 +4704,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multiCustomAttribute
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multiCustomAttribute
 
 
  
@@ -4733,7 +4734,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_switchCustomAttribute
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_switchCustomAttribute
 
 
  
@@ -4763,7 +4764,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_transitionToLabel
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_transitionToLabel
 
 
  
@@ -4793,7 +4794,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_preventRevertToName
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_preventRevertToName
 
 
  
@@ -4823,7 +4824,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_transitionToLabelAttachedDisk
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_transitionToLabelAttachedDisk
 
 
  
@@ -4853,7 +4854,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multipleDisksAtDifferentSCSISlotsImport
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_multipleDisksAtDifferentSCSISlotsImport
 
 
  
@@ -4883,7 +4884,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneImport
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_cloneImport
 
 
  
@@ -4913,7 +4914,7 @@ jobs:
         no_output_timeout: 90m
         name: Run Acceptance Tests
         command: |
-          /home/kyriakos/work/gopath/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_readVappChildResourcePool
+          $GOPATH/src/github.com/terraform-providers/terraform-provider-vsphere/scripts/test_runner.sh TestAccResourceVSphereVirtualMachine_readVappChildResourcePool
 
 
 workflows:
