@@ -5082,30 +5082,9 @@ workflows:
     jobs:
       - linters
       - build
-      - TestAccResourceVSphereVirtualMachine_storageVMotionGlobalSetting:
-          requires:
-          - build
-      - TestAccResourceVSphereVirtualMachine_storageVMotionSingleDisk:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_storageVMotionGlobalSetting
-      - TestAccResourceVSphereVirtualMachine_storageVMotionPinDatastore:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_storageVMotionSingleDisk
-      - TestAccResourceVSphereVirtualMachine_storageVMotionRenamedVirtualMachine:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_storageVMotionPinDatastore
-      - TestAccResourceVSphereVirtualMachine_storageVMotionLinkedClones:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_storageVMotionRenamedVirtualMachine
-      - TestAccResourceVSphereVirtualMachine_storageVMotionBlockExternallyAttachedDisks:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_storageVMotionLinkedClones
-      - TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreCluster:
-          requires:
-          - TestAccResourceVSphereVirtualMachine_storageVMotionBlockExternallyAttachedDisks
       - TestAccResourceVSphereVirtualMachine_hostVMotionDatastoreCluster:
           requires:
-          - TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreCluster
+          - build
       - TestAccResourceVSphereVirtualMachine_storageVMotionDatastoreClusterSingleDisk:
           requires:
           - TestAccResourceVSphereVirtualMachine_hostVMotionDatastoreCluster
