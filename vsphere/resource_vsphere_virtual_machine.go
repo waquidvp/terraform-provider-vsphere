@@ -126,6 +126,12 @@ func resourceVSphereVirtualMachine() *schema.Resource {
 			Default:     true,
 			Description: "Controls whether or not the guest network waiter waits for a routable address. When false, the waiter does not wait for a default gateway, nor are IP addresses checked against any discovered default gateways as part of its success criteria.",
 		},
+		"template": {
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: "Controls if the virtual machine will be powered on.",
+			ForceNew:    true,
+		},
 		"ignored_guest_ips": {
 			Type:        schema.TypeList,
 			Optional:    true,
@@ -441,9 +447,12 @@ func resourceVSphereVirtualMachineRead(d *schema.ResourceData, meta interface{})
 	// If the VM is part of a vApp, InventoryPath will point to a host path
 	// rather than a VM path, so this step must be skipped.
 	var vmContainer string
-	if vprops.ParentVApp != nil {
+	switch {
+	case vprops.ParentVApp != nil:
 		vmContainer = vprops.ParentVApp.Value
-	} else {
+	case d.Get("template").(bool) == true:
+		vmContainer = ""
+	default:
 		vmContainer = vprops.ResourcePool.Value
 	}
 	if !vappcontainer.IsVApp(client, vmContainer) {
@@ -1217,7 +1226,10 @@ func resourceVSphereVirtualMachineCreateBare(d *schema.ResourceData, meta interf
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse poweron_timeout as a valid duration: %s", err)
 	}
-	// Start the virtual machine
+	// Start the virtual machine unless the VM is a template.
+	if d.Get("template").(bool) {
+		return vm, nil
+	}
 	if err := virtualmachine.PowerOn(vm, pTimeout); err != nil {
 		return nil, fmt.Errorf("error powering on virtual machine: %s", err)
 	}
@@ -1416,6 +1428,9 @@ func resourceVsphereMachineDeployOVF(d *schema.ResourceData, meta interface{}) (
 		return nil, fmt.Errorf("failed to parse poweron_timeout as a valid duration: %s", err)
 	}
 	// Start the virtual machine
+	if d.Get("template").(bool) {
+		return vm, nil
+	}
 	if err := virtualmachine.PowerOn(vm, pTimeout); err != nil {
 		return nil, fmt.Errorf("error powering on virtual machine: %s", err)
 	}
@@ -1631,6 +1646,9 @@ func resourceVSphereVirtualMachineCreateClone(d *schema.ResourceData, meta inter
 		}
 	}
 	// Finally time to power on the virtual machine!
+	if d.Get("template").(bool) {
+		return vm, nil
+	}
 	pTimeout := time.Duration(d.Get("poweron_timeout").(int)) * time.Second
 	if err := virtualmachine.PowerOn(vm, pTimeout); err != nil {
 		return nil, fmt.Errorf("error powering on virtual machine: %s", err)
