@@ -29,7 +29,7 @@ data "vsphere_datacenter" "datacenter" {
 
 data "vsphere_datastore_cluster" "datastore_cluster" {
   name          = "datastore-cluster1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 ```
 

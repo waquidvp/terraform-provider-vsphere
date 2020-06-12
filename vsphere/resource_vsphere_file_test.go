@@ -32,6 +32,7 @@ func TestAccResourceVSphereFile_basic(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"TF_VAR_VSPHERE_DATACENTER", "TF_VAR_VSPHERE_NFS_DS_NAME"})
 		},
@@ -79,6 +80,7 @@ func TestAccResourceVSphereFile_basicUploadAndCopy(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"TF_VAR_VSPHERE_DATACENTER", "TF_VAR_VSPHERE_NFS_DS_NAME"})
 		},
@@ -133,6 +135,7 @@ func TestAccResourceVSphereFile_renamePostCreation(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"TF_VAR_VSPHERE_DATACENTER", "TF_VAR_VSPHERE_NFS_DS_NAME"})
 		},
@@ -197,6 +200,7 @@ func TestAccResourceVSphereFile_uploadAndCopyAndUpdate(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"TF_VAR_VSPHERE_DATACENTER", "TF_VAR_VSPHERE_NFS_DS_NAME"})
 		},

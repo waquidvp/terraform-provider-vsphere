@@ -27,8 +27,8 @@ resource "vsphere_datacenter" "testDC" {
 `
 
 const testAccCheckVSphereDatacenterConfigTags = `
-resource "vsphere_tag_category" "terraform-test-category" {
-  name        = "terraform-test-tag-category"
+resource "vsphere_tag_category" "testacc-category" {
+  name        = "testacc-tag-category"
   cardinality = "MULTIPLE"
 
   associable_types = [
@@ -36,14 +36,14 @@ resource "vsphere_tag_category" "terraform-test-category" {
   ]
 }
 
-resource "vsphere_tag" "terraform-test-tag" {
-  name        = "terraform-test-tag"
-  category_id = "${vsphere_tag_category.terraform-test-category.id}"
+resource "vsphere_tag" "testacc-tag" {
+  name        = "testacc-tag"
+  category_id = "${vsphere_tag_category.testacc-category.id}"
 }
 
 resource "vsphere_datacenter" "testDC" {
   name = "testDC"
-  tags = ["${vsphere_tag.terraform-test-tag.id}"]
+  tags = ["${vsphere_tag.testacc-tag.id}"]
 }
 `
 
@@ -55,8 +55,8 @@ variable "extra_tags" {
   ]
 }
 
-resource "vsphere_tag_category" "terraform-test-category" {
-  name        = "terraform-test-tag-category"
+resource "vsphere_tag_category" "testacc-category" {
+  name        = "testacc-tag-category"
   cardinality = "MULTIPLE"
 
   associable_types = [
@@ -64,32 +64,32 @@ resource "vsphere_tag_category" "terraform-test-category" {
   ]
 }
 
-resource "vsphere_tag" "terraform-test-tag" {
-  name        = "terraform-test-tag"
-  category_id = "${vsphere_tag_category.terraform-test-category.id}"
+resource "vsphere_tag" "testacc-tag" {
+  name        = "testacc-tag"
+  category_id = "${vsphere_tag_category.testacc-category.id}"
 }
 
-resource "vsphere_tag" "terraform-test-tags-alt" {
+resource "vsphere_tag" "testacc-tags-alt" {
   count       = "${length(var.extra_tags)}"
   name        = "${var.extra_tags[count.index]}"
-  category_id = "${vsphere_tag_category.terraform-test-category.id}"
+  category_id = "${vsphere_tag_category.testacc-category.id}"
 }
 
 resource "vsphere_datacenter" "testDC" {
   name = "testDC"
-  tags = "${vsphere_tag.terraform-test-tags-alt.*.id}"
+  tags = "${vsphere_tag.testacc-tags-alt.*.id}"
 }
 `
 
 const testAccCheckVSphereDatacenterConfigCustomAttributes = `
-resource "vsphere_custom_attribute" "terraform-test-attribute" {
-  name                = "terraform-test-attribute"
+resource "vsphere_custom_attribute" "testacc-attribute" {
+  name                = "testacc-attribute"
   managed_object_type = "Datacenter"
 }
 
 locals {
   dc_attrs = {
-    "${vsphere_custom_attribute.terraform-test-attribute.id}" = "value"
+    "${vsphere_custom_attribute.testacc-attribute.id}" = "value"
   }
 }
 
@@ -99,20 +99,20 @@ resource "vsphere_datacenter" "testDC" {
 }
 `
 const testAccCheckVSphereDatacenterConfigMultiCustomAttributes = `
-resource "vsphere_custom_attribute" "terraform-test-attribute" {
-  name                = "terraform-test-attribute"
+resource "vsphere_custom_attribute" "testacc-attribute" {
+  name                = "testacc-attribute"
   managed_object_type = "Datacenter"
 }
 
-resource "vsphere_custom_attribute" "terraform-test-attribute-2" {
-  name                = "terraform-test-attribute-2"
+resource "vsphere_custom_attribute" "testacc-attribute-2" {
+  name                = "testacc-attribute-2"
   managed_object_type = "Datacenter"
 }
 
 locals {
   dc_attrs = {
-    "${vsphere_custom_attribute.terraform-test-attribute.id}" = "value"
-    "${vsphere_custom_attribute.terraform-test-attribute-2.id}" = "value-2"
+    "${vsphere_custom_attribute.testacc-attribute.id}" = "value"
+    "${vsphere_custom_attribute.testacc-attribute-2.id}" = "value-2"
   }
 }
 
@@ -163,6 +163,7 @@ func TestAccResourceVSphereDatacenter_createOnSubfolder(t *testing.T) {
 func TestAccResourceVSphereDatacenter_singleTag(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 		},
 		Providers:    testAccProviders,
@@ -175,7 +176,7 @@ func TestAccResourceVSphereDatacenter_singleTag(t *testing.T) {
 						testAccCheckVSphereDatacenterResourceName,
 						true,
 					),
-					testAccResourceVSphereDatacenterCheckTags("terraform-test-tag"),
+					testAccResourceVSphereDatacenterCheckTags("testacc-tag"),
 				),
 			},
 		},
@@ -185,6 +186,7 @@ func TestAccResourceVSphereDatacenter_singleTag(t *testing.T) {
 func TestAccResourceVSphereDatacenter_modifyTags(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 		},
 		Providers:    testAccProviders,
@@ -197,7 +199,7 @@ func TestAccResourceVSphereDatacenter_modifyTags(t *testing.T) {
 						testAccCheckVSphereDatacenterResourceName,
 						true,
 					),
-					testAccResourceVSphereDatacenterCheckTags("terraform-test-tag"),
+					testAccResourceVSphereDatacenterCheckTags("testacc-tag"),
 				),
 			},
 			{
@@ -207,7 +209,7 @@ func TestAccResourceVSphereDatacenter_modifyTags(t *testing.T) {
 						testAccCheckVSphereDatacenterResourceName,
 						true,
 					),
-					testAccResourceVSphereDatacenterCheckTags("terraform-test-tags-alt"),
+					testAccResourceVSphereDatacenterCheckTags("testacc-tags-alt"),
 				),
 			},
 		},
@@ -217,6 +219,7 @@ func TestAccResourceVSphereDatacenter_modifyTags(t *testing.T) {
 func TestAccResourceVSphereDatacenter_singleCustomAttribute(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 		},
 		Providers:    testAccProviders,
@@ -239,6 +242,7 @@ func TestAccResourceVSphereDatacenter_singleCustomAttribute(t *testing.T) {
 func TestAccResourceVSphereDatacenter_modifyCustomAttribute(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 		},
 		Providers:    testAccProviders,

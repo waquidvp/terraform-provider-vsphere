@@ -32,23 +32,19 @@ variable "cluster" {
   default = "cluster1"
 }
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
 data "vsphere_compute_cluster" "compute_cluster" {
   name          = "${var.cluster}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_network" "network" {
   name          = "network1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_datastore" "datastore" {
   name          = "datastore1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_vapp_container" "vapp_container" {
@@ -65,7 +61,7 @@ resource "vsphere_vapp_entity" "vapp_entity" {
 resource "vsphere_virtual_machine" "vm" {
   name             = "terraform-virtual-machine-test"
   resource_pool_id = "${vsphere_vapp_container.vapp_container.id}"
-  datastore_id     = "${data.vsphere_datastore.datastore.id}"
+  datastore_id     = vsphere_nas_datastore.ds1.id
   num_cpus         = 2
   memory           = 1024
   guest_id         = "ubuntu64Guest"
@@ -76,7 +72,7 @@ resource "vsphere_virtual_machine" "vm" {
   }
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id = "${data.vsphere_network.network1.id}"
   }
 }
 ```

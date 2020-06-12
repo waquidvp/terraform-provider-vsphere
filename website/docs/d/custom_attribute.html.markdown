@@ -23,7 +23,7 @@ and require vCenter.
 
 ```hcl
 data "vsphere_custom_attribute" "attribute" {
-  name = "terraform-test-attribute"
+  name = "testacc-attribute"
 }
 ```
 

@@ -63,35 +63,35 @@ data "vsphere_datacenter" "dc" {
 
 data "vsphere_datastore" "datastore" {
   name          = "datastore1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_compute_cluster" "cluster" {
   name          = "cluster1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_host" "host" {
   name          = "esxi1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_network" "network" {
   name          = "network1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  name             = "terraform-test"
-  resource_pool_id = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
-  datastore_id     = "${data.vsphere_datastore.datastore.id}"
+  name             = "testacc-test"
+  resource_pool_id = "${data.vsphere_compute_cluster.rootcluster1.resource_pool_id}"
+  datastore_id     = vsphere_nas_datastore.ds1.id
 
   num_cpus = 2
   memory   = 2048
   guest_id = "other3xLinux64Guest"
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id = "${data.vsphere_network.network1.id}"
   }
 
   disk {
@@ -102,18 +102,18 @@ resource "vsphere_virtual_machine" "vm" {
 
 resource "vsphere_compute_cluster_vm_group" "cluster_vm_group" {
   name                = "terraform-test-cluster-vm-group"
-  compute_cluster_id  = "${data.vsphere_compute_cluster.cluster.id}"
+  compute_cluster_id  = "${data.vsphere_compute_cluster.rootcluster1.id}"
   virtual_machine_ids = ["${vsphere_virtual_machine.vm.id}"]
 }
 
 resource "vsphere_compute_cluster_host_group" "cluster_host_group" {
   name               = "terraform-test-cluster-vm-group"
-  compute_cluster_id = "${data.vsphere_compute_cluster.cluster.id}"
-  host_system_ids    = ["${data.vsphere_host.host.id}"]
+  compute_cluster_id = "${data.vsphere_compute_cluster.rootcluster1.id}"
+  host_system_ids    = [data.vsphere_host.roothost1.id]
 }
 
 resource "vsphere_compute_cluster_vm_host_rule" "cluster_vm_host_rule" {
-  compute_cluster_id       = "${data.vsphere_compute_cluster.cluster.id}"
+  compute_cluster_id       = "${data.vsphere_compute_cluster.rootcluster1.id}"
   name                     = "terraform-test-cluster-vm-host-rule"
   vm_group_name            = "${vsphere_compute_cluster_vm_group.cluster_vm_group.name}"
   affinity_host_group_name = "${vsphere_compute_cluster_host_group.cluster_host_group.name}"

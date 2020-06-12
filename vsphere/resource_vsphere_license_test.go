@@ -24,6 +24,7 @@ func TestAccResourceVSphereLicense_basic(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccVSpherePreLicenseBasicCheck(t)
 		},
@@ -45,6 +46,7 @@ func TestAccResourceVSphereLicense_invalid(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 		},
 		Providers:    testAccProviders,
@@ -66,6 +68,7 @@ func TestAccResourceVSphereLicense_withLabelsOnVCenter(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccVSpherePreLicenseBasicCheck(t)
 			testAccVspherePreLicenseESXiServerIsNotSetCheck(t)
@@ -88,6 +91,7 @@ func TestAccResourceVSphereLicense_withLabelsOnESXiServer(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccVSpherePreLicenseBasicCheck(t)
 			testAccSkipIfNotEsxi(t)

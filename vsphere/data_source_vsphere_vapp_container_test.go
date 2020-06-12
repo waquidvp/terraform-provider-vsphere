@@ -2,6 +2,7 @@ package vsphere
 
 import (
 	"fmt"
+	"github.com/terraform-providers/terraform-provider-vsphere/vsphere/internal/helper/testhelper"
 	"os"
 	"regexp"
 	"testing"
@@ -12,6 +13,7 @@ import (
 func TestAccDataSourceVSphereVAppContainer_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccDataSourceVSphereVAppContainerPreCheck(t)
 			testAccSkipIfEsxi(t)
@@ -31,6 +33,7 @@ func TestAccDataSourceVSphereVAppContainer_basic(t *testing.T) {
 func TestAccDataSourceVSphereVAppContainer_path(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccDataSourceVSphereVAppContainerPreCheck(t)
 			testAccSkipIfEsxi(t)
@@ -58,68 +61,45 @@ func testAccDataSourceVSphereVAppContainerPreCheck(t *testing.T) {
 
 func testAccDataSourceVSphereVAppContainerConfig() string {
 	return fmt.Sprintf(`
-variable "cluster" {
-  default = "%s"
-}
-
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
 data "vsphere_datacenter" "dc" {
-  name = var.datacenter
-}
-
-data "vsphere_compute_cluster" "cluster" {
-  datacenter_id = data.vsphere_datacenter.dc.id
-  name          = var.cluster
+  name = data.vsphere_datacenter.rootdc1.name
 }
 
 resource "vsphere_vapp_container" "vapp" {
   name                 = "vapp-test"
-  parent_resource_pool = data.vsphere_compute_cluster.cluster.resource_pool_id
+  parent_resource_pool = data.vsphere_compute_cluster.rootcluster1.resource_pool_id
 }
 
 data "vsphere_vapp_container" "container" {
   name          = vsphere_vapp_container.vapp.name
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.rootdc1.id
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_CLUSTER"),
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1(), testhelper.ConfigDataRootComputeCluster1()),
 	)
 }
 
 func testAccDataSourceVSphereVAppContainerPathConfig() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
-
-variable "cluster" {
-  default = "%s"
-}
+%s
 
 data "vsphere_datacenter" "dc" {
-  name = var.datacenter
-}
-
-data "vsphere_compute_cluster" "cluster" {
-  datacenter_id = data.vsphere_datacenter.dc.id
-  name          = var.cluster
+  name = data.vsphere_datacenter.rootdc1.name
 }
 
 resource "vsphere_vapp_container" "vapp" {
   name                 = "vapp-test"
-  parent_resource_pool = data.vsphere_compute_cluster.cluster.resource_pool_id
+  parent_resource_pool = data.vsphere_compute_cluster.rootcluster1.resource_pool_id
 }
 
 data "vsphere_vapp_container" "container" {
-  name          = "/${var.datacenter}/vm/vapp-test"
-  datacenter_id = data.vsphere_datacenter.dc.id
+  name          = "/${data.vsphere_datacenter.rootdc1.name}/vm/vapp-test"
+  datacenter_id = data.vsphere_datacenter.rootdc1.id
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
-		os.Getenv("TF_VAR_VSPHERE_CLUSTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1(), testhelper.ConfigDataRootComputeCluster1()),
 	)
 }

@@ -64,12 +64,12 @@ data "vsphere_datacenter" "dc" {
 data "vsphere_host" "host" {
   count         = "${length(var.esxi_hosts)}"
   name          = "${var.esxi_hosts[count.index]}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 
   uplinks         = ["uplink1", "uplink2", "uplink3", "uplink4"]
   active_uplinks  = ["uplink1", "uplink2"]
@@ -104,8 +104,8 @@ specified in config, and will drift if not modified, causing errors.
 
 ```hcl
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 
   uplinks         = ["tfup1", "tfup2"]
   active_uplinks  = ["tfup1"]

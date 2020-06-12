@@ -22,22 +22,22 @@ as that folder exists.
 ## Example Usage
 
 The basic example below creates a virtual machine folder named
-`terraform-test-folder` in the default datacenter's VM hierarchy. 
+`testacc-folder` in the default datacenter's VM hierarchy. 
 
 ```hcl
 data "vsphere_datacenter" "dc" {}
 
 resource "vsphere_folder" "folder" {
-  path          = "terraform-test-folder"
+  path          = "testacc-folder"
   type          = "vm"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 ```
 
 ### Example with subfolders
 
 The below example builds off of the above by first creating a folder named
-`terraform-test-parent`, and then locating `terraform-test-folder` in that
+`terraform-test-parent`, and then locating `testacc-folder` in that
 folder. To ensure the parent is created first, we create an interpolation
 dependency off the parent's `path` attribute.
 
@@ -51,13 +51,13 @@ data "vsphere_datacenter" "dc" {}
 resource "vsphere_folder" "parent" {
   path          = "terraform-test-parent"
   type          = "vm"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_folder" "folder" {
-  path          = "${vsphere_folder.parent.path}/terraform-test-folder"
+  path          = "${vsphere_folder.parent.path}/testacc-folder"
   type          = "vm"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 ```
 
@@ -69,8 +69,8 @@ The following arguments are supported:
   the root of the type of folder you are creating, and the supplied datacenter.
   For example, given a default datacenter of `default-dc`, a folder of type
   `vm` (denoting a virtual machine folder), and a supplied folder of
-  `terraform-test-folder`, the resulting path would be
-  `/default-dc/vm/terraform-test-folder`.
+  `testacc-folder`, the resulting path would be
+  `/default-dc/vm/testacc-folder`.
 
 ~> **NOTE:** `path` can be modified - the resulting behavior is dependent on
 what section of `path` you are modifying. If you are modifying the parent (so
@@ -116,9 +116,9 @@ its full path, via the following command:
 [docs-import]: https://www.terraform.io/docs/import/index.html
 
 ```
-terraform import vsphere_folder.folder /default-dc/vm/terraform-test-folder
+terraform import vsphere_folder.folder /default-dc/vm/testacc-folder
 ```
 
 The above command would import the folder from our examples above, the VM
-folder named `terraform-test-folder` located in the datacenter named
+folder named `testacc-folder` located in the datacenter named
 `default-dc`.

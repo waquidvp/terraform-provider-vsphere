@@ -26,7 +26,7 @@ data "vsphere_host" "host" {
 }
 
 data "vsphere_host_pci_device" "dev" {
-  host_id   = data.vsphere_host.host.id
+  host_id   = data.vsphere_host.roothost1.id
   class_id  = 123
   vendor_id = 456
 }
@@ -44,7 +44,7 @@ data "vsphere_host_pci_device" "dev" {
  }
  
  data "vsphere_host_pci_device" "dev" {
-   host_id    = data.vsphere_host.host.id
+   host_id    = data.vsphere_host.roothost1.id
    name_regex = "MMC"
  }
  ```

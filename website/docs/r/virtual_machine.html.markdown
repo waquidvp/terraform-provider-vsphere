@@ -274,22 +274,17 @@ data "vsphere_resource_pool" "pool" {
 
 data "vsphere_host" "host" {
   name          = "hostip"
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
-data "vsphere_network" "network" {
-  name          = "VM Network"
-  datacenter_id = data.vsphere_datacenter.datacenter.id
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
 resource "vsphere_virtual_machine" "vmFromLocalOvf" {
   name = "vm1"
-  resource_pool_id           = data.vsphere_resource_pool.pool.id
-  datastore_id               = data.vsphere_datastore.datastore.id
-  host_system_id             = data.vsphere_host.host.id
+  resource_pool_id = data.vsphere_resource_pool.pool.id
+  datastore_id = data.vsphere_datastore.datastore.id
+  host_system_id = data.vsphere_host.host.id
   wait_for_guest_net_timeout = 0
-  wait_for_guest_ip_timeout  = 0
-  datacenter_id              = data.vsphere_datacenter.dc.id
+  wait_for_guest_ip_timeout = 0
+  datacenter_id = data.vsphere_datacenter.dc.id
   ovf_deploy {
     local_ovf_path       = "Full Path to local ovf/ova file"
     disk_provisioning    = "thin"
@@ -308,13 +303,13 @@ resource "vsphere_virtual_machine" "vmFromLocalOvf" {
 }
 
 resource "vsphere_virtual_machine" "vmFromRemoteOvf" {
-  name                       = "vm2"
-  resource_pool_id           = data.vsphere_resource_pool.pool.id
-  datastore_id               = data.vsphere_datastore.datastore.id
-  host_system_id             = data.vsphere_host.host.id
+  name = "vm2"
+  resource_pool_id = data.vsphere_resource_pool.pool.id
+  datastore_id = data.vsphere_datastore.datastore.id
+  host_system_id = data.vsphere_host.host.id
   wait_for_guest_net_timeout = 0
-  wait_for_guest_ip_timeout  = 0
-  datacenter_id              = data.vsphere_datacenter.dc.id
+  wait_for_guest_ip_timeout = 0
+  datacenter_id = data.vsphere_datacenter.dc.id
   ovf_deploy {
     // Url to remote ovf/ova file
     remote_ovf_url = "https://download3.vmware.com/software/vmw-tools/nested-esxi/Nested_ESXi7.0_Appliance_Template_v1.ova"

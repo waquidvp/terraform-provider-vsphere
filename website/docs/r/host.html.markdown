@@ -26,7 +26,7 @@ resource "vsphere_host" "h1" {
   username = "root"
   password = "password"
   license = "00000-00000-00000-00000i-00000"
-  datacenter = data.vsphere_datacenter.dc.id
+  datacenter = data.vsphere_datacenter.rootdc1.id
 }
 ```
 
@@ -39,7 +39,7 @@ data "vsphere_datacenter" "dc" {
 
 data "vsphere_compute_cluster" "c1" {
   name = "DC0_C0"
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.rootdc1.id
 }
 
 resource "vsphere_host" "h1" {

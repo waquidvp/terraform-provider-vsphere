@@ -22,13 +22,13 @@ Provides a VMware vSphere vnic resource.
     
     data "vsphere_host" "h1" {
       name          = "esxi1.host.test"
-      datacenter_id = data.vsphere_datacenter.dc.id
+      datacenter_id = data.vsphere_datacenter.rootdc1.id
     }
     
     
     resource "vsphere_distributed_virtual_switch" "d1" {
       name          = "dc_DVPG0"
-      datacenter_id = data.vsphere_datacenter.dc.id
+      datacenter_id = data.vsphere_datacenter.rootdc1.id
       host {
         host_system_id = data.vsphere_host.h1.id
         devices        = ["vnic3"]
@@ -61,7 +61,7 @@ Provides a VMware vSphere vnic resource.
     
     data "vsphere_host" "h1" {
       name          = "esxi1.host.test"
-      datacenter_id = data.vsphere_datacenter.dc.id
+      datacenter_id = data.vsphere_datacenter.rootdc1.id
     }
     
     

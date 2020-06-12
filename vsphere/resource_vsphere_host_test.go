@@ -3,6 +3,7 @@ package vsphere
 import (
 	"errors"
 	"fmt"
+	"github.com/terraform-providers/terraform-provider-vsphere/vsphere/internal/helper/testhelper"
 	"os"
 	"regexp"
 	"strconv"
@@ -22,6 +23,7 @@ import (
 func TestAccResourceVSphereHost_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"ESX_HOSTNAME", "ESX_USERNAME", "ESX_PASSWORD"})
 		},
@@ -50,6 +52,7 @@ func TestAccResourceVSphereHost_basic(t *testing.T) {
 func TestAccResourceVSphereHost_rootFolder(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"ESX_HOSTNAME", "ESX_USERNAME", "ESX_PASSWORD"})
 		},
@@ -70,6 +73,7 @@ func TestAccResourceVSphereHost_rootFolder(t *testing.T) {
 func TestAccResourceVSphereHost_connection(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"ESX_HOSTNAME", "ESX_USERNAME", "ESX_PASSWORD"})
 		},
@@ -98,6 +102,7 @@ func TestAccResourceVSphereHost_connection(t *testing.T) {
 func TestAccResourceVSphereHost_maintenance(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"ESX_HOSTNAME", "ESX_USERNAME", "ESX_PASSWORD"})
 		},
@@ -127,6 +132,7 @@ func TestAccResourceVSphereHost_lockdown(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"ESX_HOSTNAME", "ESX_USERNAME", "ESX_PASSWORD"})
 		},
@@ -163,6 +169,7 @@ func TestAccResourceVSphereHost_lockdown_invalid(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"ESX_HOSTNAME", "ESX_USERNAME", "ESX_PASSWORD"})
 		},
@@ -181,6 +188,7 @@ func TestAccResourceVSphereHost_lockdown_invalid(t *testing.T) {
 func TestAccResourceVSphereHost_emptyLicense(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccCheckEnvVariables(t, []string{"ESX_HOSTNAME", "ESX_USERNAME", "ESX_PASSWORD"})
 		},
@@ -382,7 +390,7 @@ func testAccVSphereHostConfig() string {
 
 	resource "vsphere_compute_cluster" "c1" {
 	  name = "%s"
-	  datacenter_id = data.vsphere_datacenter.dc.id
+	  datacenter_id = data.vsphere_datacenter.rootdc1.id
 	}
 
 	resource "vsphere_host" "h1" {
@@ -396,7 +404,7 @@ func testAccVSphereHostConfig() string {
 	  license = "%s"
 	  cluster = vsphere_compute_cluster.c1.id
 	}
-	`, os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+	`, testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		"TestCluster",
 		os.Getenv("ESX_HOSTNAME"),
 		os.Getenv("ESX_USERNAME"),
@@ -420,9 +428,9 @@ func testAccVSphereHostConfig_rootFolder() string {
 
 	  # Makes sense to update
 	  license = "%s"
-	  datacenter = data.vsphere_datacenter.dc.id
+	  datacenter = data.vsphere_datacenter.rootdc1.id
 	}
-	`, os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+	`, testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("ESX_HOSTNAME"),
 		os.Getenv("ESX_USERNAME"),
 		os.Getenv("ESX_PASSWORD"),
@@ -444,9 +452,9 @@ func testAccVSphereHostConfig_emptyLicense() string {
 	  thumbprint = "%s"
 
 	  # Makes sense to update
-	  datacenter = data.vsphere_datacenter.dc.id
+	  datacenter = data.vsphere_datacenter.rootdc1.id
 	}
-	`, os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+	`, testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("ESX_HOSTNAME"),
 		os.Getenv("ESX_USERNAME"),
 		os.Getenv("ESX_PASSWORD"),
@@ -461,7 +469,7 @@ func testAccVSphereHostConfig_import() string {
 		
 	resource "vsphere_compute_cluster" "c1" {
 	  name = "%s"
-	  datacenter_id = data.vsphere_datacenter.dc.id
+	  datacenter_id = data.vsphere_datacenter.rootdc1.id
 	}
 		
 	resource "vsphere_host" "h1" {
@@ -475,7 +483,7 @@ func testAccVSphereHostConfig_import() string {
 	  license = "%s"
 	  cluster = vsphere_compute_cluster.c1.id
 	}	  
-	`, os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+	`, testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		"TestCluster",
 		os.Getenv("ESX_HOSTNAME"),
 		os.Getenv("ESX_USERNAME"),
@@ -492,7 +500,7 @@ func testAccVSphereHostConfig_connection(connection bool) string {
 		
 	resource "vsphere_compute_cluster" "c1" {
 	  name = "%s"
-	  datacenter_id = data.vsphere_datacenter.dc.id
+	  datacenter_id = data.vsphere_datacenter.rootdc1.id
 	}
 		
 	resource "vsphere_host" "h1" {
@@ -505,7 +513,7 @@ func testAccVSphereHostConfig_connection(connection bool) string {
 	  connected = "%s"
 	  cluster = vsphere_compute_cluster.c1.id
 	}	  
-	`, os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+	`, testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		"TestCluster",
 		os.Getenv("ESX_HOSTNAME"),
 		os.Getenv("ESX_USERNAME"),
@@ -523,7 +531,7 @@ func testAccVSphereHostConfig_maintenance(maintenance bool) string {
 		
 	resource "vsphere_compute_cluster" "c1" {
 	  name = "%s"
-	  datacenter_id = data.vsphere_datacenter.dc.id
+	  datacenter_id = data.vsphere_datacenter.rootdc1.id
 	}
 		
 	resource "vsphere_host" "h1" {
@@ -537,7 +545,7 @@ func testAccVSphereHostConfig_maintenance(maintenance bool) string {
 	  maintenance = "%s"
 	  cluster = vsphere_compute_cluster.c1.id
 	}	  
-	`, os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+	`, testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		"TestCluster",
 		os.Getenv("ESX_HOSTNAME"),
 		os.Getenv("ESX_USERNAME"),
@@ -555,7 +563,7 @@ func testAccVSphereHostConfig_lockdown(lockdown string) string {
 		
 	resource "vsphere_compute_cluster" "c1" {
 	  name = "%s"
-	  datacenter_id = data.vsphere_datacenter.dc.id
+	  datacenter_id = data.vsphere_datacenter.rootdc1.id
 	}
 		
 	resource "vsphere_host" "h1" {
@@ -570,7 +578,7 @@ func testAccVSphereHostConfig_lockdown(lockdown string) string {
 	  lockdown = "%s"
 	  cluster = vsphere_compute_cluster.c1.id
 	}	  
-	`, os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+	`, testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		"TestCluster",
 		os.Getenv("ESX_HOSTNAME"),
 		os.Getenv("ESX_USERNAME"),

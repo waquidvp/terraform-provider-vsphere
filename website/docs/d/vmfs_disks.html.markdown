@@ -28,7 +28,7 @@ data "vsphere_host" "host" {
 }
 
 data "vsphere_vmfs_disks" "available" {
-  host_system_id = "${data.vsphere_host.host.id}"
+  host_system_id = data.vsphere_host.roothost1.id
   rescan         = true
   filter         = "mpx.vmhba1:C0:T[12]:L0"
 }

@@ -47,23 +47,23 @@ data "vsphere_datacenter" "dc" {
 
 data "vsphere_datastore_cluster" "datastore_cluster" {
   name          = "datastore-cluster1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_compute_cluster" "cluster" {
   name          = "cluster1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_network" "network" {
   name          = "network1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_virtual_machine" "vm" {
   count                = 2
   name                 = "terraform-test-${count.index}"
-  resource_pool_id     = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
+  resource_pool_id     = "${data.vsphere_compute_cluster.rootcluster1.resource_pool_id}"
   datastore_cluster_id = "${data.vsphere_datastore_cluster.datastore_cluster.id}"
 
   num_cpus = 2
@@ -71,7 +71,7 @@ resource "vsphere_virtual_machine" "vm" {
   guest_id = "other3xLinux64Guest"
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id = "${data.vsphere_network.network1.id}"
   }
 
   disk {

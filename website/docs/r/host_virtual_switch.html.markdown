@@ -36,7 +36,7 @@ data "vsphere_host" "host" {
 
 resource "vsphere_host_virtual_switch" "switch" {
   name           = "vSwitchTerraformTest"
-  host_system_id = "${data.vsphere_host.host.id}"
+  host_system_id = data.vsphere_host.roothost1.id
 
   network_adapters = ["vmnic0", "vmnic1"]
 
@@ -59,7 +59,7 @@ data "vsphere_host" "host" {
 
 resource "vsphere_host_virtual_switch" "switch" {
   name           = "vSwitchTerraformTest"
-  host_system_id = "${data.vsphere_host.host.id}"
+  host_system_id = data.vsphere_host.roothost1.id
 
   network_adapters = ["vmnic0", "vmnic1"]
 

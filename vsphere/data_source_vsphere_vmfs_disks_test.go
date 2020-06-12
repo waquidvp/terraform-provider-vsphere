@@ -2,6 +2,7 @@ package vsphere
 
 import (
 	"fmt"
+	"github.com/terraform-providers/terraform-provider-vsphere/vsphere/internal/helper/testhelper"
 	"os"
 	"testing"
 
@@ -12,6 +13,7 @@ import (
 func TestAccDataSourceVSphereVmfsDisks_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccDataSourceVSphereVmfsDisksPreCheck(t)
 		},
@@ -56,9 +58,7 @@ func testCheckOutputBool(name string, value bool) resource.TestCheckFunc {
 
 func testAccDataSourceVSphereVmfsDisksConfig() string {
 	return fmt.Sprintf(`
-data "vsphere_datacenter" "datacenter" {
-  name = "%s"
-}
+%s
 
 data "vsphere_host" "esxi_host" {
   name          = "%s"
@@ -74,7 +74,7 @@ output "found" {
   value = "${length(data.vsphere_vmfs_disks.available.disks) >= 1 ? "true" : "false" }"
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("TF_VAR_VSPHERE_ESXI1"),
 	)
 }

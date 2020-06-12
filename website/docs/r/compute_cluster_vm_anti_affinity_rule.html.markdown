@@ -55,31 +55,31 @@ data "vsphere_datacenter" "dc" {
 
 data "vsphere_datastore" "datastore" {
   name          = "datastore1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_compute_cluster" "cluster" {
   name          = "cluster1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_network" "network" {
   name          = "network1"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_virtual_machine" "vm" {
   count            = 2
   name             = "terraform-test-${count.index}"
-  resource_pool_id = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
-  datastore_id     = "${data.vsphere_datastore.datastore.id}"
+  resource_pool_id = "${data.vsphere_compute_cluster.rootcluster1.resource_pool_id}"
+  datastore_id     = vsphere_nas_datastore.ds1.id
 
   num_cpus = 2
   memory   = 2048
   guest_id = "other3xLinux64Guest"
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id = "${data.vsphere_network.network1.id}"
   }
 
   disk {
@@ -90,7 +90,7 @@ resource "vsphere_virtual_machine" "vm" {
 
 resource "vsphere_compute_cluster_vm_anti_affinity_rule" "cluster_vm_anti_affinity_rule" {
   name                = "terraform-test-cluster-vm-anti-affinity-rule"
-  compute_cluster_id  = "${data.vsphere_compute_cluster.cluster.id}"
+  compute_cluster_id  = "${data.vsphere_compute_cluster.rootcluster1.id}"
   virtual_machine_ids = ["${vsphere_virtual_machine.vm.*.id}"]
 }
 ```

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/terraform-providers/terraform-provider-vsphere/vsphere/internal/helper/testhelper"
 	"os"
 	"reflect"
 	"sort"
@@ -21,6 +22,7 @@ import (
 func TestAccResourceVSphereDatastoreClusterVMAntiAffinityRule_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDatastoreClusterVMAntiAffinityRulePreCheck(t)
 		},
@@ -81,6 +83,7 @@ func TestAccResourceVSphereDatastoreClusterVMAntiAffinityRule_basic(t *testing.T
 func TestAccResourceVSphereDatastoreClusterVMAntiAffinityRule_updateEnabled(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDatastoreClusterVMAntiAffinityRulePreCheck(t)
 		},
@@ -118,6 +121,7 @@ func TestAccResourceVSphereDatastoreClusterVMAntiAffinityRule_updateEnabled(t *t
 func TestAccResourceVSphereDatastoreClusterVMAntiAffinityRule_updateCount(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDatastoreClusterVMAntiAffinityRulePreCheck(t)
 		},
@@ -314,9 +318,7 @@ func testAccResourceVSphereDatastoreClusterVMAntiAffinityRuleGetMultiple(s *terr
 
 func testAccResourceVSphereDatastoreClusterVMAntiAffinityRuleConfig(count int, enabled bool) string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
 variable "nfs_host" {
   default = "%s"
@@ -333,46 +335,24 @@ variable "esxi_hosts" {
   ]
 }
 
-variable "cluster" {
-  default = "%s"
-}
-
-variable "network_label" {
-  default = "%s"
-}
-
 variable "vm_count" {
   default = "%d"
-}
-
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
 }
 
 data "vsphere_host" "esxi_hosts" {
   count         = "${length(var.esxi_hosts)}"
   name          = "${var.esxi_hosts[count.index]}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-}
-
-data "vsphere_compute_cluster" "cluster" {
-  name          = "${var.cluster}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-}
-
-data "vsphere_network" "network" {
-  name          = "${var.network_label}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_datastore_cluster" "datastore_cluster" {
   name          = "terraform-datastore-cluster-test"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
   sdrs_enabled  = true
 }
 
 resource "vsphere_nas_datastore" "datastore" {
-  name                 = "terraform-test-nas"
+  name                 = "testacc-nas"
   host_system_ids      = "${data.vsphere_host.esxi_hosts.*.id}"
   datastore_cluster_id = "${vsphere_datastore_cluster.datastore_cluster.id}"
 
@@ -384,7 +364,7 @@ resource "vsphere_nas_datastore" "datastore" {
 resource "vsphere_virtual_machine" "vm" {
   count                = "${var.vm_count}"
   name                 = "terraform-test-${count.index}"
-  resource_pool_id     = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
+  resource_pool_id     = "${data.vsphere_compute_cluster.rootcluster1.resource_pool_id}"
   datastore_cluster_id = "${vsphere_datastore_cluster.datastore_cluster.id}"
 
   num_cpus = 2
@@ -394,7 +374,7 @@ resource "vsphere_virtual_machine" "vm" {
   wait_for_guest_net_timeout = -1
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id = "${data.vsphere_network.network1.id}"
   }
 
   disk {
@@ -412,13 +392,12 @@ resource "vsphere_datastore_cluster_vm_anti_affinity_rule" "cluster_vm_anti_affi
   enabled              = %t
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("TF_VAR_VSPHERE_NAS_HOST"),
 		os.Getenv("TF_VAR_VSPHERE_NFS_PATH"),
 		os.Getenv("TF_VAR_VSPHERE_ESXI1"),
 		os.Getenv("TF_VAR_VSPHERE_ESXI2"),
-		os.Getenv("TF_VAR_VSPHERE_CLUSTER"),
-		os.Getenv("TF_VAR_VSPHERE_PG_NAME"),
+
 		count,
 		enabled,
 	)

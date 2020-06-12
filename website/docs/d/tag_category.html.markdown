@@ -23,7 +23,7 @@ requires vCenter 6.0 or higher.
 
 ```hcl
 data "vsphere_tag_category" "category" {
-  name = "terraform-test-category"
+  name = "testacc-category"
 }
 ```
 

@@ -2,6 +2,7 @@ package vsphere
 
 import (
 	"fmt"
+	"github.com/terraform-providers/terraform-provider-vsphere/vsphere/internal/helper/testhelper"
 	"os"
 	"testing"
 
@@ -14,6 +15,7 @@ import (
 func TestAccResourceVSphereDistributedPortGroup_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDistributedPortGroupPreCheck(t)
 		},
@@ -50,6 +52,7 @@ func TestAccResourceVSphereDistributedPortGroup_basic(t *testing.T) {
 func TestAccResourceVSphereDistributedPortGroup_inheritPolicyDiffCheck(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDistributedPortGroupPreCheck(t)
 		},
@@ -69,6 +72,7 @@ func TestAccResourceVSphereDistributedPortGroup_inheritPolicyDiffCheck(t *testin
 func TestAccResourceVSphereDistributedPortGroup_inheritPolicyDiffCheckVlanRangeTypeSetEdition(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDistributedPortGroupPreCheck(t)
 		},
@@ -88,6 +92,7 @@ func TestAccResourceVSphereDistributedPortGroup_inheritPolicyDiffCheckVlanRangeT
 func TestAccResourceVSphereDistributedPortGroup_overrideVlan(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDistributedPortGroupPreCheck(t)
 		},
@@ -109,6 +114,7 @@ func TestAccResourceVSphereDistributedPortGroup_overrideVlan(t *testing.T) {
 func TestAccResourceVSphereDistributedPortGroup_singleTag(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDistributedPortGroupPreCheck(t)
 		},
@@ -119,7 +125,7 @@ func TestAccResourceVSphereDistributedPortGroup_singleTag(t *testing.T) {
 				Config: testAccResourceVSphereDistributedPortGroupConfigSingleTag(),
 				Check: resource.ComposeTestCheckFunc(
 					testAccResourceVSphereDistributedPortGroupExists(true),
-					testAccResourceVSphereDistributedPortGroupCheckTags("terraform-test-tag"),
+					testAccResourceVSphereDistributedPortGroupCheckTags("testacc-tag"),
 				),
 			},
 		},
@@ -129,6 +135,7 @@ func TestAccResourceVSphereDistributedPortGroup_singleTag(t *testing.T) {
 func TestAccResourceVSphereDistributedPortGroup_multiTag(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDistributedPortGroupPreCheck(t)
 		},
@@ -139,7 +146,7 @@ func TestAccResourceVSphereDistributedPortGroup_multiTag(t *testing.T) {
 				Config: testAccResourceVSphereDistributedPortGroupConfigMultiTag(),
 				Check: resource.ComposeTestCheckFunc(
 					testAccResourceVSphereDistributedPortGroupExists(true),
-					testAccResourceVSphereDistributedPortGroupCheckTags("terraform-test-tags-alt"),
+					testAccResourceVSphereDistributedPortGroupCheckTags("testacc-tags-alt"),
 				),
 			},
 		},
@@ -149,6 +156,7 @@ func TestAccResourceVSphereDistributedPortGroup_multiTag(t *testing.T) {
 func TestAccResourceVSphereDistributedPortGroup_singleCustomAttribute(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDistributedPortGroupPreCheck(t)
 		},
@@ -169,6 +177,7 @@ func TestAccResourceVSphereDistributedPortGroup_singleCustomAttribute(t *testing
 func TestAccResourceVSphereDistributedPortGroup_multiCustomAttribute(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereDistributedPortGroupPreCheck(t)
 		},
@@ -275,17 +284,11 @@ func testAccResourceVSphereDistributedPortGroupCheckCustomAttributes() resource.
 
 func testAccResourceVSphereDistributedPortGroupConfig() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
-
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
+%s
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_distributed_port_group" "pg" {
@@ -293,23 +296,17 @@ resource "vsphere_distributed_port_group" "pg" {
   distributed_virtual_switch_uuid = "${vsphere_distributed_virtual_switch.dvs.id}"
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 	)
 }
 
 func testAccResourceVSphereDistributedPortGroupConfigPolicyInherit() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
-
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
+%s
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 
   vlan_id = 1000
 
@@ -347,23 +344,17 @@ resource "vsphere_distributed_port_group" "pg" {
   distributed_virtual_switch_uuid = "${vsphere_distributed_virtual_switch.dvs.id}"
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 	)
 }
 
 func testAccResourceVSphereDistributedPortGroupConfigPolicyInheritVLANRange() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
-
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
+%s
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 
   vlan_range {
 		min_vlan = 1000
@@ -409,23 +400,17 @@ resource "vsphere_distributed_port_group" "pg" {
   distributed_virtual_switch_uuid = "${vsphere_distributed_virtual_switch.dvs.id}"
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 	)
 }
 
 func testAccResourceVSphereDistributedPortGroupConfigOverrideVLAN() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
-
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
+%s
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
   
 	vlan_range {
 		min_vlan = 1000
@@ -443,22 +428,16 @@ resource "vsphere_distributed_port_group" "pg" {
 	}
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 	)
 }
 
 func testAccResourceVSphereDistributedPortGroupConfigSingleTag() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
-resource "vsphere_tag_category" "terraform-test-category" {
-  name        = "terraform-test-tag-category"
+resource "vsphere_tag_category" "testacc-category" {
+  name        = "testacc-tag-category"
   cardinality = "MULTIPLE"
 
   associable_types = [
@@ -466,31 +445,29 @@ resource "vsphere_tag_category" "terraform-test-category" {
   ]
 }
 
-resource "vsphere_tag" "terraform-test-tag" {
-  name        = "terraform-test-tag"
-  category_id = "${vsphere_tag_category.terraform-test-category.id}"
+resource "vsphere_tag" "testacc-tag" {
+  name        = "testacc-tag"
+  category_id = "${vsphere_tag_category.testacc-category.id}"
 }
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_distributed_port_group" "pg" {
   name                            = "terraform-test-pg"
   distributed_virtual_switch_uuid = "${vsphere_distributed_virtual_switch.dvs.id}"
-  tags                            = ["${vsphere_tag.terraform-test-tag.id}"]
+  tags                            = ["${vsphere_tag.testacc-tag.id}"]
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 	)
 }
 
 func testAccResourceVSphereDistributedPortGroupConfigMultiTag() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
 variable "extra_tags" {
   default = [
@@ -499,12 +476,8 @@ variable "extra_tags" {
   ]
 }
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
-resource "vsphere_tag_category" "terraform-test-category" {
-  name        = "terraform-test-tag-category"
+resource "vsphere_tag_category" "testacc-category" {
+  name        = "testacc-tag-category"
   cardinality = "MULTIPLE"
 
   associable_types = [
@@ -512,55 +485,49 @@ resource "vsphere_tag_category" "terraform-test-category" {
   ]
 }
 
-resource "vsphere_tag" "terraform-test-tag" {
-  name        = "terraform-test-tag"
-  category_id = "${vsphere_tag_category.terraform-test-category.id}"
+resource "vsphere_tag" "testacc-tag" {
+  name        = "testacc-tag"
+  category_id = "${vsphere_tag_category.testacc-category.id}"
 }
 
-resource "vsphere_tag" "terraform-test-tags-alt" {
+resource "vsphere_tag" "testacc-tags-alt" {
   count       = "${length(var.extra_tags)}"
   name        = "${var.extra_tags[count.index]}"
-  category_id = "${vsphere_tag_category.terraform-test-category.id}"
+  category_id = "${vsphere_tag_category.testacc-category.id}"
 }
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_distributed_port_group" "pg" {
   name                            = "terraform-test-pg"
   distributed_virtual_switch_uuid = "${vsphere_distributed_virtual_switch.dvs.id}"
-  tags                            = "${vsphere_tag.terraform-test-tags-alt.*.id}"
+  tags                            = "${vsphere_tag.testacc-tags-alt.*.id}"
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 	)
 }
 
 func testAccResourceVSphereDistributedPortGroupConfigSingleCustomAttribute() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
-resource "vsphere_custom_attribute" "terraform-test-attribute" {
-  name                = "terraform-test-attribute"
+resource "vsphere_custom_attribute" "testacc-attribute" {
+  name                = "testacc-attribute"
   managed_object_type = "DistributedVirtualPortgroup" 
 }
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 locals {
   pg_attrs = {
-    "${vsphere_custom_attribute.terraform-test-attribute.id}" = "value"
+    "${vsphere_custom_attribute.testacc-attribute.id}" = "value"
   }
 }
 
@@ -571,47 +538,41 @@ resource "vsphere_distributed_port_group" "pg" {
   custom_attributes = "${local.pg_attrs}"
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 	)
 }
 
 func testAccResourceVSphereDistributedPortGroupConfigMultiCustomAttribute() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
 variable "custom_attrs" {
   default = [
-    "terraform-test-attribute-1",
-    "terraform-test-attribute-2"
+    "testacc-attribute-1",
+    "testacc-attribute-2"
   ]
 }
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
-resource "vsphere_custom_attribute" "terraform-test-attribute" {
-  name                = "terraform-test-attribute"
+resource "vsphere_custom_attribute" "testacc-attribute" {
+  name                = "testacc-attribute"
   managed_object_type = "DistributedVirtualPortgroup"
 }
 
-resource "vsphere_custom_attribute" "terraform-test-attribute-alt" {
+resource "vsphere_custom_attribute" "testacc-attribute-alt" {
   count               = "${length(var.custom_attrs)}"
   name                = "${var.custom_attrs[count.index]}"
   managed_object_type = "DistributedVirtualPortgroup"
 }
 
 resource "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "testacc-dvs"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 locals {
   pg_attrs = {
-    "${vsphere_custom_attribute.terraform-test-attribute-alt.0.id}" = "value"
-    "${vsphere_custom_attribute.terraform-test-attribute-alt.1.id}" = "value-2"
+    "${vsphere_custom_attribute.testacc-attribute-alt.0.id}" = "value"
+    "${vsphere_custom_attribute.testacc-attribute-alt.1.id}" = "value-2"
   }
 }
 
@@ -622,6 +583,6 @@ resource "vsphere_distributed_port_group" "pg" {
   custom_attributes = "${local.pg_attrs}"
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 	)
 }

@@ -51,19 +51,15 @@ variable "hosts" {
   ]
 }
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
 data "vsphere_host" "hosts" {
   count         = "${length(var.hosts)}"
   name          = "${var.hosts[count.index]}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_compute_cluster" "compute_cluster" {
-  name            = "terraform-compute-cluster-test"
-  datacenter_id   = "${data.vsphere_datacenter.dc.id}"
+  name            = "testacc-compute-cluster"
+  datacenter_id   = "${data.vsphere_datacenter.rootdc1.id}"
   host_system_ids = ["${data.vsphere_host.hosts.*.id}"]
 
   drs_enabled          = true

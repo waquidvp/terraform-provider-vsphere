@@ -21,7 +21,7 @@ ESXi connections.
 
 ## Example Usage
 
-The following example locates a DVS that is named `terraform-test-dvs`, in the
+The following example locates a DVS that is named `testacc-dvs`, in the
 datacenter `dc1`. It then uses this DVS to set up a
 `vsphere_distributed_port_group` resource that uses the first uplink as a
 primary uplink and the second uplink as a secondary.
@@ -32,7 +32,7 @@ data "vsphere_datacenter" "datacenter" {
 }
 
 data "vsphere_distributed_virtual_switch" "dvs" {
-  name          = "terraform-test-dvs"
+  name          = "testacc-dvs"
   datacenter_id = "${data.vsphere_datacenter.datacenter.id}"
 }
 

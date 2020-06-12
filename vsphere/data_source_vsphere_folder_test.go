@@ -14,6 +14,7 @@ var testAccDataSourceVSphereFolderExpectedRegexp = regexp.MustCompile("^group-v"
 func TestAccDataSourceVSphereFolder_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccDataSourceVSphereFolderPreCheck(t)
 		},

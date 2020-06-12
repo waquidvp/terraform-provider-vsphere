@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/terraform-providers/terraform-provider-vsphere/vsphere/internal/helper/testhelper"
 	"os"
 	"reflect"
 	"testing"
@@ -19,6 +20,7 @@ import (
 func TestAccResourceVSphereStorageDrsVMOverride_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereStorageDrsVMOverridePreCheck(t)
 		},
@@ -69,6 +71,7 @@ func TestAccResourceVSphereStorageDrsVMOverride_basic(t *testing.T) {
 func TestAccResourceVSphereStorageDrsVMOverride_overrides(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereStorageDrsVMOverridePreCheck(t)
 		},
@@ -89,6 +92,7 @@ func TestAccResourceVSphereStorageDrsVMOverride_overrides(t *testing.T) {
 func TestAccResourceVSphereStorageDrsVMOverride_update(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereStorageDrsVMOverridePreCheck(t)
 		},
@@ -197,9 +201,7 @@ func testAccResourceVSphereStorageDrsVMOverrideMatch(behavior string, enabled, i
 
 func testAccResourceVSphereStorageDrsVMOverrideConfigBasic() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
 variable "nfs_host" {
   default = "%s"
@@ -221,38 +223,25 @@ variable "resource_pool" {
   default = "%s"
 }
 
-variable "network_label" {
-  default = "%s"
-}
-
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
 data "vsphere_resource_pool" "pool" {
   name          = "${var.resource_pool}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-}
-
-data "vsphere_network" "network" {
-  name          = "${var.network_label}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_host" "esxi_hosts" {
   count         = "${length(var.esxi_hosts)}"
   name          = "${var.esxi_hosts[count.index]}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_datastore_cluster" "datastore_cluster" {
   name          = "terraform-datastore-cluster-test"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
   sdrs_enabled  = true
 }
 
 resource "vsphere_nas_datastore" "datastore" {
-  name                 = "terraform-test-nas"
+  name                 = "testacc-nas"
   host_system_ids      = "${data.vsphere_host.esxi_hosts.*.id}"
   datastore_cluster_id = "${vsphere_datastore_cluster.datastore_cluster.id}"
 
@@ -262,8 +251,8 @@ resource "vsphere_nas_datastore" "datastore" {
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  name             = "terraform-test"
-  resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
+  name             = "testacc-test"
+  resource_pool_id = "${vsphere_resource_pool.pool1.id}"
   datastore_id     = "${vsphere_nas_datastore.datastore.id}"
 
   num_cpus = 2
@@ -271,7 +260,7 @@ resource "vsphere_virtual_machine" "vm" {
   guest_id = "other3xLinux64Guest"
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id = "${data.vsphere_network.network1.id}"
   }
 
   disk {
@@ -286,22 +275,19 @@ resource "vsphere_storage_drs_vm_override" "drs_vm_override" {
   sdrs_enabled         = false
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("TF_VAR_VSPHERE_NAS_HOST"),
 		os.Getenv("TF_VAR_VSPHERE_NFS_PATH"),
-		os.Getenv("TF_VAR_VSPHERE_NFS_DS_NAME"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootHost1(), testhelper.ConfigDataRootHost2(), testhelper.ConfigResDS1(), testhelper.ConfigDataRootComputeCluster1(), testhelper.ConfigResResourcePool1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("TF_VAR_VSPHERE_ESXI1"),
 		os.Getenv("TF_VAR_VSPHERE_ESXI2"),
 		os.Getenv("TF_VAR_VSPHERE_RESOURCE_POOL"),
-		os.Getenv("TF_VAR_VSPHERE_PG_NAME"),
 	)
 }
 
 func testAccResourceVSphereStorageDrsVMOverrideConfigOverrides() string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
 variable "nfs_host" {
   default = "%s"
@@ -323,38 +309,25 @@ variable "resource_pool" {
   default = "%s"
 }
 
-variable "network_label" {
-  default = "%s"
-}
-
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
 data "vsphere_resource_pool" "pool" {
   name          = "${var.resource_pool}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-}
-
-data "vsphere_network" "network" {
-  name          = "${var.network_label}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 data "vsphere_host" "esxi_hosts" {
   count         = "${length(var.esxi_hosts)}"
   name          = "${var.esxi_hosts[count.index]}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_datastore_cluster" "datastore_cluster" {
   name          = "terraform-datastore-cluster-test"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
   sdrs_enabled  = true
 }
 
 resource "vsphere_nas_datastore" "datastore" {
-  name                 = "terraform-test-nas"
+  name                 = "testacc-nas"
   host_system_ids      = "${data.vsphere_host.esxi_hosts.*.id}"
   datastore_cluster_id = "${vsphere_datastore_cluster.datastore_cluster.id}"
 
@@ -364,8 +337,8 @@ resource "vsphere_nas_datastore" "datastore" {
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  name                 = "terraform-test"
-  resource_pool_id     = "${data.vsphere_resource_pool.pool.id}"
+  name                 = "testacc-test"
+  resource_pool_id     = "${vsphere_resource_pool.pool1.id}"
   datastore_cluster_id = "${vsphere_datastore_cluster.datastore_cluster.id}"
 
   num_cpus = 2
@@ -373,7 +346,7 @@ resource "vsphere_virtual_machine" "vm" {
   guest_id = "other3xLinux64Guest"
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id = "${data.vsphere_network.network1.id}"
   }
 
   disk {
@@ -391,13 +364,12 @@ resource "vsphere_storage_drs_vm_override" "drs_vm_override" {
   sdrs_intra_vm_affinity = false
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("TF_VAR_VSPHERE_NAS_HOST"),
 		os.Getenv("TF_VAR_VSPHERE_NFS_PATH"),
-		os.Getenv("TF_VAR_VSPHERE_NFS_DS_NAME"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootHost1(), testhelper.ConfigDataRootHost2(), testhelper.ConfigResDS1(), testhelper.ConfigDataRootComputeCluster1(), testhelper.ConfigResResourcePool1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("TF_VAR_VSPHERE_ESXI_HOST2"),
 		os.Getenv("TF_VAR_VSPHERE_ESXI_HOST3"),
 		os.Getenv("TF_VAR_VSPHERE_RESOURCE_POOL"),
-		os.Getenv("TF_VAR_VSPHERE_PG_NAME"),
 	)
 }

@@ -32,13 +32,9 @@ variable "cluster" {
   default = "cluster1"
 }
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
 data "vsphere_compute_cluster" "compute_cluster" {
   name          = "${var.cluster}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_resource_pool" "resource_pool" {

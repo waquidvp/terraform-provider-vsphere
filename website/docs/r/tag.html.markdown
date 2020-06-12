@@ -22,8 +22,8 @@ requires vCenter 6.0 or higher.
 
 ## Example Usage
 
-This example creates a tag named `terraform-test-tag`. This tag is assigned the
-`terraform-test-category` category, which was created by the
+This example creates a tag named `testacc-tag`. This tag is assigned the
+`testacc-category` category, which was created by the
 [`vsphere_tag_category` resource][docs-tag-category-resource]. The resulting
 tag can be assigned to VMs and datastores only, and can be the only value in
 the category that can be assigned, as per the restrictions defined by the
@@ -33,7 +33,7 @@ category.
 
 ```hcl
 resource "vsphere_tag_category" "category" {
-  name        = "terraform-test-category"
+  name        = "testacc-category"
   cardinality = "SINGLE"
   description = "Managed by Terraform"
 
@@ -44,7 +44,7 @@ resource "vsphere_tag_category" "category" {
 }
 
 resource "vsphere_tag" "tag" {
-  name        = "terraform-test-tag"
+  name        = "testacc-tag"
   category_id = "${vsphere_tag_category.category.id}"
   description = "Managed by Terraform"
 }
@@ -63,7 +63,7 @@ created tag to it:
 
 ```hcl
 resource "vsphere_tag_category" "category" {
-  name        = "terraform-test-category"
+  name        = "testacc-category"
   cardinality = "SINGLE"
   description = "Managed by Terraform"
 
@@ -74,7 +74,7 @@ resource "vsphere_tag_category" "category" {
 }
 
 resource "vsphere_tag" "tag" {
-  name        = "terraform-test-tag"
+  name        = "testacc-tag"
   category_id = "${vsphere_tag_category.category.id}"
   description = "Managed by Terraform"
 }
@@ -111,5 +111,5 @@ both the tag's category name and the name of the tag as a JSON string to
 
 ```
 terraform import vsphere_tag.tag \
-  '{"category_name": "terraform-test-category", "tag_name": "terraform-test-tag"}'
+  '{"category_name": "testacc-category", "tag_name": "testacc-tag"}'
 ```

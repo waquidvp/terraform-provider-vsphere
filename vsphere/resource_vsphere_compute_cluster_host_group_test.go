@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/terraform-providers/terraform-provider-vsphere/vsphere/internal/helper/testhelper"
 	"os"
 	"reflect"
 	"sort"
@@ -20,6 +21,7 @@ import (
 func TestAccResourceVSphereComputeClusterHostGroup_basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereComputeClusterHostGroupPreCheck(t)
 		},
@@ -75,6 +77,7 @@ func TestAccResourceVSphereComputeClusterHostGroup_basic(t *testing.T) {
 func TestAccResourceVSphereComputeClusterHostGroup_update(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck: func() {
+			RunSweepers()
 			testAccPreCheck(t)
 			testAccResourceVSphereComputeClusterHostGroupPreCheck(t)
 		},
@@ -208,9 +211,7 @@ func testAccResourceVSphereComputeClusterHostGroupGetMultiple(s *terraform.State
 
 func testAccResourceVSphereComputeClusterHostGroupConfig(count int) string {
 	return fmt.Sprintf(`
-variable "datacenter" {
-  default = "%s"
-}
+%s
 
 variable "hosts" {
   default = [
@@ -223,19 +224,15 @@ variable "host_count" {
   default = "%d"
 }
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
 data "vsphere_host" "hosts" {
   count         = "${var.host_count}"
   name          = "${var.hosts[count.index]}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_compute_cluster" "cluster" {
-  name            = "terraform-compute-cluster-test"
-  datacenter_id   = "${data.vsphere_datacenter.dc.id}"
+  name            = "testacc-compute-cluster"
+  datacenter_id   = "${data.vsphere_datacenter.rootdc1.id}"
   host_system_ids = "${data.vsphere_host.hosts.*.id}"
 
   force_evacuate_on_destroy = true
@@ -247,7 +244,7 @@ resource "vsphere_compute_cluster_host_group" "cluster_host_group" {
   host_system_ids    = "${data.vsphere_host.hosts.*.id}"
 }
 `,
-		os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		os.Getenv("TF_VAR_VSPHERE_ESXI1"),
 		os.Getenv("TF_VAR_VSPHERE_ESXI2"),
 		count,

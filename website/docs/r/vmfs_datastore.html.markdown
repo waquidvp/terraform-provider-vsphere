@@ -70,7 +70,7 @@ data "vsphere_host" "esxi_host" {
 }
 
 resource "vsphere_vmfs_datastore" "datastore" {
-  name           = "terraform-test"
+  name           = "testacc-test"
   host_system_id = "${data.vsphere_host.esxi_host.id}"
 
   disks = [
@@ -109,7 +109,7 @@ data "vsphere_vmfs_disks" "available" {
 }
 
 resource "vsphere_vmfs_datastore" "datastore" {
-  name           = "terraform-test"
+  name           = "testacc-test"
   host_system_id = "${data.vsphere_host.esxi_host.id}"
   folder         = "datastore-folder"
 

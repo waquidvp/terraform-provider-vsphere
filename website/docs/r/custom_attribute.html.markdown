@@ -23,12 +23,12 @@ and require vCenter.
 
 ## Example Usage
 
-This example creates a custom attribute named `terraform-test-attribute`. The 
+This example creates a custom attribute named `testacc-attribute`. The 
 resulting custom attribute can be assigned to VMs only.
 
 ```hcl
 resource "vsphere_custom_attribute" "attribute" {
-  name                = "terraform-test-attribute"
+  name                = "testacc-attribute"
   managed_object_type = "VirtualMachine"
 }
 ```
@@ -46,7 +46,7 @@ value to created custom attribute on it.
 
 ```hcl
 resource "vsphere_custom_attribute" "attribute" {
-  name                = "terraform-test-attribute"
+  name                = "testacc-attribute"
   managed_object_type = "VirtualMachine"
 }
 
@@ -105,5 +105,5 @@ via its name, using the following command:
 [docs-import]: https://www.terraform.io/docs/import/index.html
 
 ```
-terraform import vsphere_custom_attribute.attribute terraform-test-attribute
+terraform import vsphere_custom_attribute.attribute testacc-attribute
 ```

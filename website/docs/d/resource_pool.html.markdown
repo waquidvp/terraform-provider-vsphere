@@ -44,7 +44,7 @@ by specifying the path as per the example below:
 ```
 data "vsphere_resource_pool" "pool" {
   name          = "esxi1/Resources"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 ```
 

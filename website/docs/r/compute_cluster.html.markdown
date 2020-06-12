@@ -63,19 +63,15 @@ variable "hosts" {
   ]
 }
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.datacenter}"
-}
-
 data "vsphere_host" "hosts" {
   count         = "${length(var.hosts)}"
   name          = "${var.hosts[count.index]}"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  datacenter_id = "${data.vsphere_datacenter.rootdc1.id}"
 }
 
 resource "vsphere_compute_cluster" "compute_cluster" {
-  name            = "terraform-compute-cluster-test"
-  datacenter_id   = "${data.vsphere_datacenter.dc.id}"
+  name            = "testacc-compute-cluster"
+  datacenter_id   = "${data.vsphere_datacenter.rootdc1.id}"
   host_system_ids = ["${data.vsphere_host.hosts.*.id}"]
 
   drs_enabled          = true
@@ -95,7 +91,7 @@ The following arguments are supported:
 * `folder` - (Optional) The relative path to a folder to put this cluster in.
   This is a path relative to the datacenter you are deploying the cluster to.
   Example: for the `dc1` datacenter, and a provided `folder` of `foo/bar`,
-  Terraform will place a cluster named `terraform-compute-cluster-test` in a
+  Terraform will place a cluster named `testacc-compute-cluster` in a
   host folder located at `/dc1/host/foo/bar`, with the final inventory path
   being `/dc1/host/foo/bar/terraform-datastore-cluster-test`.
 * `tags` - (Optional) The IDs of any tags to attach to this resource. See

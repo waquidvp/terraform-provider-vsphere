@@ -44,7 +44,7 @@ data "vsphere_host" "esxi_hosts" {
 }
 
 resource "vsphere_nas_datastore" "datastore" {
-  name            = "terraform-test"
+  name            = "testacc-test"
   host_system_ids = ["${data.vsphere_host.esxi_hosts.*.id}"]
 
   type         = "NFS"

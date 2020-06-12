@@ -28,12 +28,12 @@ data "vsphere_datacenter" "dc" {
 
 data "vsphere_datastore" "datastore" {
   name          = "datastore1"
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.rootdc1.id
 }
 
 resource "vsphere_content_library" "library" {
   name            = "Content Library Test"
-  storage_backing = data.vsphere_datastore.datastore.id
+  storage_backing = vsphere_nas_datastore.ds1.id
   description     = "A new source of content" 
 }
 ```
