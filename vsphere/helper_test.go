@@ -5,7 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/contentlibrary"
+	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/network"
 	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/spbm"
+	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/testhelper"
 	"github.com/vmware/govmomi/vapi/library"
 	"github.com/vmware/govmomi/vapi/rest"
 	"os"
@@ -87,8 +89,8 @@ func testClientVariablesForResource(s *terraform.State, addr string) (testCheckV
 		tagsManager:        tm,
 		resourceID:         rs.Primary.ID,
 		resourceAttributes: rs.Primary.Attributes,
-		esxiHost:           os.Getenv("TF_VAR_VSPHERE_NFS_DS_NAME"),
-		datacenter:         os.Getenv("TF_VAR_VSPHERE_DATACENTER"),
+		esxiHost:           testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootHost1(), testhelper.ConfigDataRootHost2(), testhelper.ConfigResDS1(), testhelper.ConfigDataRootComputeCluster1(), testhelper.ConfigResResourcePool1(), testhelper.ConfigDataRootPortGroup1()),
+		datacenter:         testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
 		timeout:            time.Minute * 5,
 	}, nil
 }
@@ -1147,6 +1149,11 @@ func testGetVmStoragePolicy(s *terraform.State, resourceName string) (string, er
 func RunSweepers() {
 	tagSweep("")
 	dcSweep("")
+	vmSweep("")
+	rpSweep("")
+	dsSweep("")
+	netSweep("")
+	folderSweep("")
 }
 
 func tagSweep(r string) error {
@@ -1164,10 +1171,9 @@ func tagSweep(r string) error {
 		return err
 	}
 	for _, cat := range cats {
-		if regexp.MustCompile("save").Match([]byte(cat.Name)) {
-			continue
+		if regexp.MustCompile("testacc").Match([]byte(cat.Name)) {
+			tm.DeleteCategory(ctx, &cat)
 		}
-		tm.DeleteCategory(ctx, &cat)
 	}
 	return nil
 }
@@ -1182,11 +1188,152 @@ func dcSweep(r string) error {
 		return err
 	}
 	for _, dc := range dcs {
-		if regexp.MustCompile("save").Match([]byte(dc.Name())) {
-			continue
+		if regexp.MustCompile("testacc").Match([]byte(dc.Name())) {
+			_, err := dc.Destroy(context.TODO())
+			if err != nil {
+				return err
+			}
 		}
-		_, err := dc.Destroy(context.TODO())
-		if err != nil {
+	}
+	return nil
+}
+
+func vmSweep(r string) error {
+	client, err := sweepVSphereClient()
+	if err != nil {
+		return err
+	}
+	vms, err := virtualmachine.List(client.vimClient)
+	if err != nil {
+		return err
+	}
+	for _, vm := range vms {
+		if regexp.MustCompile("testacc").Match([]byte(vm.Name())) {
+			virtualmachine.PowerOff(vm)
+			virtualmachine.Destroy(vm)
+		}
+	}
+	return nil
+}
+
+func rpSweep(r string) error {
+	client, err := sweepVSphereClient()
+	if err != nil {
+		return err
+	}
+	rps, err := resourcepool.List(client.vimClient)
+	if err != nil {
+		return err
+	}
+	for _, rp := range rps {
+		if regexp.MustCompile("testacc").Match([]byte(rp.Name())) {
+			return resourcepool.Delete(rp)
+		}
+	}
+	return nil
+}
+
+func dsSweep(r string) error {
+	client, err := sweepVSphereClient()
+	if err != nil {
+		return err
+	}
+	dss, err := datastore.List(client.vimClient)
+	if err != nil {
+		return err
+	}
+	for _, ds := range dss {
+		if regexp.MustCompile("testacc").Match([]byte(ds.Name())) {
+			return datastore.Unmount(client.vimClient, ds)
+		}
+	}
+	return nil
+}
+
+func dspSweep(r string) error {
+	client, err := sweepVSphereClient()
+	if err != nil {
+		return err
+	}
+	dsps, err := storagepod.List(client.vimClient)
+	if err != nil {
+		return err
+	}
+	for _, dsp := range dsps {
+		if regexp.MustCompile("testacc").Match([]byte(dsp.Name())) {
+			return storagepod.Delete(dsp)
+		}
+	}
+	return nil
+}
+
+func ccSweep(r string) error {
+	client, err := sweepVSphereClient()
+	if err != nil {
+		return err
+	}
+	dsps, err := clustercomputeresource.List(client.vimClient)
+	if err != nil {
+		return err
+	}
+	for _, dsp := range dsps {
+		if regexp.MustCompile("testacc").Match([]byte(dsp.Name())) {
+			return clustercomputeresource.Delete(dsp)
+		}
+	}
+	return nil
+}
+
+func netSweep(r string) error {
+	client, err := sweepVSphereClient()
+	if err != nil {
+		return err
+	}
+	nets, err := network.List(client.vimClient)
+	if err != nil {
+		return err
+	}
+	for _, net := range nets {
+		if regexp.MustCompile("testacc").Match([]byte(net.Name())) {
+			_, err = net.Destroy(context.TODO())
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func folderSweep(r string) error {
+	client, err := sweepVSphereClient()
+	if err != nil {
+		return err
+	}
+	folders, err := folder.List(client.vimClient)
+	if err != nil {
+		return err
+	}
+	for _, f := range folders {
+		if regexp.MustCompile("testacc").Match([]byte(f.Name())) {
+			_, err = f.Destroy(context.TODO())
+			return err
+		}
+	}
+	return nil
+}
+
+func sessionSweep(r string) error {
+	client, err := sweepVSphereClient()
+	if err != nil {
+		return err
+	}
+	folders, err := folder.List(client.vimClient)
+	if err != nil {
+		return err
+	}
+	for _, f := range folders {
+		if regexp.MustCompile("testacc").Match([]byte(f.Name())) {
+			_, err = f.Destroy(context.TODO())
 			return err
 		}
 	}
