@@ -49,7 +49,11 @@ resource "packet_device" "esxi1" {
   operating_system = "vmware_esxi_6_7"
   billing_cycle    = "hourly"
   project_id       = local.project_id
-  network_type     = "hybrid"
+}
+
+resource "packet_device_network_type" "esxi1" {
+  device_id = packet_device.esxi1.id
+  type = "hybrid"
 }
 
 resource "packet_device" "esxi2" {
@@ -60,6 +64,11 @@ resource "packet_device" "esxi2" {
   billing_cycle    = "hourly"
   project_id       = local.project_id
   network_type     = "hybrid"
+}
+
+resource "packet_device_network_type" "esxi2" {
+  device_id = packet_device.esxi2.id
+  type = "hybrid"
 }
 
 resource "packet_device" "storage1" {
