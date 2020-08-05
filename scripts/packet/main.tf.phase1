@@ -26,6 +26,7 @@ variable "VSPHERE_TEMPLATE" {}
 
 variable "PACKET_AUTH" {}
 
+variable "PRIV_KEY" {}
 
 provider "packet" {
   auth_token = var.PACKET_AUTH
@@ -88,7 +89,7 @@ resource "packet_device" "storage1" {
     ]
     connection {
       host = packet_device.storage1.network.0.address
-      private_key = file("/home/hrich/.ssh/id_rsa")
+      private_key = var.PRIV_KEY
     }
   }
 }
