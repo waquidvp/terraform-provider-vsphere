@@ -118,9 +118,9 @@ resource "local_file" "vcsa_template" {
     vcenter_fqdn   = "vcenter.vspheretest.internal"
     admin_password = "Password123!"
   })
-  filename = "/tmp/vcsa.json"
+  filename = "./tmp/vcsa.json"
   provisioner "local-exec" {
-    command = "/tmp/mnt/vcsa-cli-installer/lin64/vcsa-deploy install --accept-eula --acknowledge-ceip --no-ssl-certificate-verification /tmp/vcsa.json"
+    command = "./tmp/mnt/vcsa-cli-installer/lin64/vcsa-deploy install --accept-eula --acknowledge-ceip --no-ssl-certificate-verification ./tmp/vcsa.json"
   }
 }
 
