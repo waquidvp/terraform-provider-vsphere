@@ -564,7 +564,6 @@ func testAccResourceVSphereComputeClusterConfigHAAdmissionControlPolicyDisabled(
 variable "hosts" {
   default = [
     "%s",
-    "%s",
   ]
 }
 
@@ -584,22 +583,14 @@ resource "vsphere_compute_cluster" "compute_cluster" {
   force_evacuate_on_destroy = true
 }
 `,
-		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
-		os.Getenv("TF_VAR_VSPHERE_ESXI1"),
-		os.Getenv("TF_VAR_VSPHERE_ESXI2"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1(), testhelper.ConfigResNestedEsxi()),
+		os.Getenv("TF_VAR_VSPHERE_ESXI_NESTED1"),
 	)
 }
 
 func testAccResourceVSphereComputeClusterConfigBasic() string {
-	return fmt.Sprintf(`
+	s := fmt.Sprintf(`
 %s
-
-variable "hosts" {
-  default = [
-    "%s",
-    "%s",
-  ]
-}
 
 data "vsphere_host" "hosts" {
   count         = "${length(var.hosts)}"
@@ -610,15 +601,14 @@ data "vsphere_host" "hosts" {
 resource "vsphere_compute_cluster" "compute_cluster" {
   name            = "testacc-compute-cluster"
   datacenter_id   = "${data.vsphere_datacenter.rootdc1.id}"
-  host_system_ids = "${data.vsphere_host.hosts.*.id}"
+  host_system_ids = [ vsphere_host.nested-esxi1.name ]
 
   force_evacuate_on_destroy = true
 }
 `,
-		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
-		os.Getenv("TF_VAR_VSPHERE_ESXI1"),
-		os.Getenv("TF_VAR_VSPHERE_ESXI2"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1(), testhelper.ConfigResNestedEsxi()),
 	)
+	return s
 }
 
 func testAccResourceVSphereComputeClusterConfigDRSHABasic() string {
@@ -627,7 +617,6 @@ func testAccResourceVSphereComputeClusterConfigDRSHABasic() string {
 
 variable "hosts" {
   default = [
-    "%s",
     "%s",
   ]
 }
@@ -651,9 +640,8 @@ resource "vsphere_compute_cluster" "compute_cluster" {
 	force_evacuate_on_destroy = true
 }
 `,
-		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
-		os.Getenv("TF_VAR_VSPHERE_ESXI1"),
-		os.Getenv("TF_VAR_VSPHERE_ESXI2"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1(), testhelper.ConfigResNestedEsxi()),
+		os.Getenv("TF_VAR_VSPHERE_ESXI_NESTED1"),
 	)
 }
 
@@ -663,7 +651,6 @@ func testAccResourceVSphereComputeClusterConfigDRSHABasicExplicitFailoverHost() 
 
 variable "hosts" {
   default = [
-    "%s",
     "%s",
   ]
 }
@@ -690,9 +677,8 @@ resource "vsphere_compute_cluster" "compute_cluster" {
   force_evacuate_on_destroy = true
 }
 `,
-		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1()),
-		os.Getenv("TF_VAR_VSPHERE_ESXI1"),
-		os.Getenv("TF_VAR_VSPHERE_ESXI2"),
+		testhelper.CombineConfigs(testhelper.ConfigDataRootDC1(), testhelper.ConfigDataRootPortGroup1(), testhelper.ConfigResNestedEsxi()),
+		os.Getenv("TF_VAR_VSPHERE_ESXI_NESTED1"),
 	)
 }
 
