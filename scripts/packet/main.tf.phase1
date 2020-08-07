@@ -119,7 +119,7 @@ resource "local_file" "vcsa_template" {
   })
   filename = "./tmp/vcsa.json"
   provisioner "local-exec" {
-    command = "./tmp/mnt/vcsa-cli-installer/lin64/vcsa-deploy install --accept-eula --acknowledge-ceip --no-ssl-certificate-verification ./tmp/vcsa.json"
+    command = "TERM=xterm-256color ./tmp/mnt/vcsa-cli-installer/lin64/vcsa-deploy install --accept-eula --acknowledge-ceip --no-ssl-certificate-verification ./tmp/vcsa.json"
   }
 }
 
