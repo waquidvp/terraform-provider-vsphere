@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/hostsystem"
 	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/structure"
 	"github.com/vmware/govmomi"
@@ -269,11 +270,12 @@ func BaseVMKernelSchema() map[string]*schema.Schema {
 			Description: "MTU of the interface.",
 		},
 		"netstack": {
-			Type:        schema.TypeString,
-			Optional:    true,
-			Description: "TCP/IP stack setting for this interface. Possible values are 'defaultTcpipStack', 'vmotion', 'vSphereProvisioning'",
-			Default:     defaultTcpipStack,
-			ForceNew:    true,
+			Type:         schema.TypeString,
+			Optional:     true,
+			Description:  "TCP/IP stack setting for this interface. Possible values are 'defaultTcpipStack', 'vmotion', 'vSphereProvisioning'",
+			Default:      defaultTcpipStack,
+			ForceNew:     true,
+			ValidateFunc: validation.StringInSlice([]string{"defaultTcpipStack", "vmotion", "vSphereProvisioning"}, false),
 		},
 		"services": {
 			Type:        schema.TypeList,
