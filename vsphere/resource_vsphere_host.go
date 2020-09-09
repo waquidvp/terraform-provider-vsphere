@@ -99,6 +99,31 @@ func resourceVsphereHost() *schema.Resource {
 				Default:      "disabled",
 				ValidateFunc: validation.StringInSlice([]string{"disabled", "normal", "strict"}, true),
 			},
+			"services": {
+				Type:        schema.TypeSet,
+				Optional:    true,
+				Description: "Services that should be enabled or disabled and their respective startup policy.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"key": {
+							Type:        schema.TypeString,
+							Required:    true,
+							Description: "Key of service to configure.",
+						},
+						"enabled": {
+							Type:        schema.TypeBool,
+							Required:    true,
+							Description: "Start or stop the service.",
+						},
+						"startup_policy": {
+							Type:         schema.TypeString,
+							Optional:     true,
+							Description:  "Startup policy for the service. Valid options are 'on', 'off', or 'automatic'.",
+							ValidateFunc: validation.StringInSlice([]string{"on", "off", "automatic"}, true),
+						},
+					},
+				},
+			},
 		},
 	}
 }
