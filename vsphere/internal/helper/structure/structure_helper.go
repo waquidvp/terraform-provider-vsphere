@@ -627,6 +627,8 @@ func ValuesAvailable(base string, keys []string, d *schema.ResourceDiff) bool {
 	return true
 }
 
+// DiffSlice compares two slices and outputs the items in a that are
+// not present in b
 func DiffSlice(a, b []interface{}) []interface{} {
 	var c []interface{}
 	for _, aa := range a {
@@ -636,7 +638,7 @@ func DiffSlice(a, b []interface{}) []interface{} {
 				found = true
 			}
 		}
-		if found == false {
+		if !found {
 			c = append(c, aa)
 		}
 	}

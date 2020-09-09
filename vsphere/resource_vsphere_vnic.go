@@ -3,15 +3,20 @@ package vsphere
 import (
 	"context"
 	"fmt"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/hostsystem"
-	"github.com/vmware/govmomi"
-	"github.com/vmware/govmomi/object"
-	"github.com/vmware/govmomi/vim25/mo"
-	"github.com/vmware/govmomi/vim25/types"
 	"log"
 	"strconv"
 	"strings"
+
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/hostsystem"
+	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/structure"
+	"github.com/vmware/govmomi"
+	"github.com/vmware/govmomi/vim25/mo"
+	"github.com/vmware/govmomi/vim25/types"
+)
+
+const (
+	defaultTcpipStack = "defaultTcpipStack"
 )
 
 func resourceVsphereNic() *schema.Resource {
@@ -107,6 +112,16 @@ func resourceVsphereNicRead(d *schema.ResourceData, meta interface{}) error {
 			return err
 		}
 	}
+
+	// Get enabled services if using default TCP/IP stack
+	if vnic.Spec.NetStackInstanceKey == defaultTcpipStack {
+		services, err := getVnicServices(ctx, client, hostId, nicId)
+		if err != nil {
+			return err
+		}
+		d.Set("services", services)
+	}
+
 	return nil
 }
 
@@ -123,15 +138,13 @@ func resourceVsphereNicCreate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceVsphereNicUpdate(d *schema.ResourceData, meta interface{}) error {
-	for _, k := range []string{
+	keys := []string{
 		"portgroup", "distributed_switch_port", "distributed_port_group",
-		"mac", "mtu", "ipv4", "ipv6", "netstack"} {
-		if d.HasChange(k) {
-			_, err := updateVNic(d, meta)
-			if err != nil {
-				return err
-			}
-			break
+		"mac", "mtu", "ipv4", "ipv6", "netstack", "services"}
+	if d.HasChanges(keys...) {
+		_, err := updateVNic(d, meta)
+		if err != nil {
+			return err
 		}
 	}
 	return resourceVsphereNicRead(d, meta)
@@ -164,14 +177,16 @@ func resourceVSphereNicImport(d *schema.ResourceData, meta interface{}) ([]*sche
 func BaseVMKernelSchema() map[string]*schema.Schema {
 	sch := map[string]*schema.Schema{
 		"portgroup": {
-			Type:        schema.TypeString,
-			Optional:    true,
-			Description: "portgroup to attach the nic to. Do not set if you set distributed_switch_port.",
+			Type:          schema.TypeString,
+			Optional:      true,
+			Description:   "portgroup to attach the nic to. Do not set if you set distributed_switch_port.",
+			ConflictsWith: []string{"distributed_switch_port"},
 		},
 		"distributed_switch_port": {
-			Type:        schema.TypeString,
-			Optional:    true,
-			Description: "UUID of the DVSwitch the nic will be attached to. Do not set if you set portgroup.",
+			Type:          schema.TypeString,
+			Optional:      true,
+			Description:   "UUID of the DVSwitch the nic will be attached to. Do not set if you set portgroup.",
+			ConflictsWith: []string{"portgroup"},
 		},
 		"distributed_port_group": {
 			Type:        schema.TypeString,
@@ -228,10 +243,7 @@ func BaseVMKernelSchema() map[string]*schema.Schema {
 						Type: schema.TypeString,
 					},
 					DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-						if strings.ToLower(old) == strings.ToLower(new) {
-							return true
-						}
-						return false
+						return strings.EqualFold(old, new)
 					},
 				},
 				"gw": {
@@ -239,10 +251,7 @@ func BaseVMKernelSchema() map[string]*schema.Schema {
 					Optional:    true,
 					Description: "IP address of the default gateway, if DHCP or autoconfig is not set.",
 					DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-						if strings.ToLower(old) == strings.ToLower(new) {
-							return true
-						}
-						return false
+						return strings.EqualFold(old, new)
 					},
 				},
 			}},
@@ -262,9 +271,17 @@ func BaseVMKernelSchema() map[string]*schema.Schema {
 		"netstack": {
 			Type:        schema.TypeString,
 			Optional:    true,
-			Description: "TCP/IP stack setting for this interface. Possible values are 'default', 'vmotion', 'provisioning'",
-			Default:     "default",
+			Description: "TCP/IP stack setting for this interface. Possible values are 'defaultTcpipStack', 'vmotion', 'vSphereProvisioning'",
+			Default:     defaultTcpipStack,
 			ForceNew:    true,
+		},
+		"services": {
+			Type:        schema.TypeList,
+			Optional:    true,
+			Description: "List of services enabled on this interface. Only allowed if using the 'defaultTcpipStack' netstack.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
 		},
 	}
 	return sch
@@ -280,7 +297,7 @@ func updateVNic(d *schema.ResourceData, meta interface{}) (string, error) {
 		return "", err
 	}
 
-	hns, err := getHostNetworkSystem(client, hostId)
+	hns, err := hostNetworkSystemFromHostSystemID(client, hostId)
 	if err != nil {
 		return "", err
 	}
@@ -288,6 +305,14 @@ func updateVNic(d *schema.ResourceData, meta interface{}) (string, error) {
 	err = hns.UpdateVirtualNic(ctx, nicId, *nic)
 	if err != nil {
 		return "", err
+	}
+
+	if d.HasChange("services") {
+		old, new := d.GetChange("services")
+		err = updateVnicServices(ctx, client, hostId, nicId, old.([]interface{}), new.([]interface{}))
+		if err != nil {
+			return "", fmt.Errorf("error with updating enabled services: %s", err)
+		}
 	}
 
 	return nicId, nil
@@ -303,7 +328,7 @@ func createVNic(d *schema.ResourceData, meta interface{}) (string, error) {
 	}
 
 	hostId := d.Get("host").(string)
-	hns, err := getHostNetworkSystem(client, hostId)
+	hns, err := hostNetworkSystemFromHostSystemID(client, hostId)
 	if err != nil {
 		return "", err
 	}
@@ -314,44 +339,27 @@ func createVNic(d *schema.ResourceData, meta interface{}) (string, error) {
 		return "", err
 	}
 	d.SetId(fmt.Sprintf("%s_%s", hostId, nicId))
+
+	services, ok := d.GetOk("services")
+	if ok {
+		old := []interface{}{}
+		new := services.([]interface{})
+		err = updateVnicServices(ctx, client, hostId, nicId, old, new)
+		if err != nil {
+			return "", fmt.Errorf("error when enabling services: %s", err)
+		}
+	}
+
 	return nicId, nil
 }
 
 func removeVnic(client *govmomi.Client, hostId, nicId string) error {
-	hns, err := getHostNetworkSystem(client, hostId)
+	hns, err := hostNetworkSystemFromHostSystemID(client, hostId)
 	if err != nil {
 		return err
 	}
 
 	return hns.RemoveVirtualNic(context.TODO(), nicId)
-}
-
-func getHostConfigManager(client *govmomi.Client, hostId string) (*object.HostConfigManager, error) {
-	host, err := hostsystem.FromID(client, hostId)
-	if err != nil {
-		return nil, err
-	}
-	cmRef := host.ConfigManager().Reference()
-	cm := object.NewHostConfigManager(client.Client, cmRef)
-
-	return cm, nil
-}
-
-func getHostNetworkSystem(client *govmomi.Client, hostId string) (*object.HostNetworkSystem, error) {
-	ctx := context.TODO()
-
-	host, err := hostsystem.FromID(client, hostId)
-	if err != nil {
-		return nil, err
-	}
-	cmRef := host.ConfigManager().Reference()
-	cm := object.NewHostConfigManager(client.Client, cmRef)
-	hns, err := cm.NetworkSystem(ctx)
-	if err != nil {
-		log.Printf("[DEBUG] Failed to access the host's NetworkSystem service: %s", err)
-		return nil, err
-	}
-	return hns, nil
 }
 
 func getNicSpecFromSchema(d *schema.ResourceData) (*types.HostVirtualNicSpec, error) {
@@ -410,37 +418,8 @@ func getNicSpecFromSchema(d *schema.ResourceData) (*types.HostVirtualNicSpec, er
 		oldAddrsIntf, newAddrsIntf := d.GetChange("ipv6.0.addresses")
 		oldAddrs := oldAddrsIntf.([]interface{})
 		newAddrs := newAddrsIntf.([]interface{})
-		removeAddrs := make([]string, len(oldAddrs))
-		addAddrs := make([]string, len(newAddrs))
-
-		// calculate addresses to remove
-		for _, old := range oldAddrs {
-			addrFound := false
-			for _, newAddr := range newAddrs {
-				if old == newAddr {
-					addrFound = true
-					break
-				}
-			}
-			if !addrFound {
-				removeAddrs = append(removeAddrs, old.(string))
-			}
-		}
-
-		// calculate addresses to add
-		for _, newAddr := range newAddrs {
-			addrFound := false
-			for _, old := range oldAddrs {
-				if newAddr == old {
-					addrFound = true
-					break
-				}
-			}
-			if !addrFound {
-				addAddrs = append(addAddrs, newAddr.(string))
-			}
-
-		}
+		removeAddrs := structure.DiffSlice(oldAddrs, newAddrs)
+		addAddrs := structure.DiffSlice(newAddrs, oldAddrs)
 
 		if len(removeAddrs) > 0 || len(addAddrs) > 0 {
 			addrs := make([]types.HostIpConfigIpV6Address, 0)
@@ -487,6 +466,11 @@ func getNicSpecFromSchema(d *schema.ResourceData) (*types.HostVirtualNicSpec, er
 
 	netStackInstance := d.Get("netstack").(string)
 
+	services := d.Get("services").([]string)
+	if netStackInstance != defaultTcpipStack && len(services) > 0 {
+		return nil, fmt.Errorf("services can only be enabled when using the '%s' netstack", defaultTcpipStack)
+	}
+
 	vnic := &types.HostVirtualNicSpec{
 		Ip:                     ipConfig,
 		Mac:                    mac,
@@ -526,6 +510,71 @@ func getVnicFromHost(ctx context.Context, client *govmomi.Client, hostId, nicId 
 		return nil, fmt.Errorf("vNic interface with id %s not found", nicId)
 	}
 	return &vNics[nicIdx], nil
+}
+
+func updateVnicServices(ctx context.Context, client *govmomi.Client, hostId, nicId string, old, new []interface{}) error {
+	hvnicm, err := hostVirtualNicManagerFromHostSystemID(client, hostId)
+	if err != nil {
+		return err
+	}
+
+	add := structure.DiffSlice(new, old)
+	remove := structure.DiffSlice(old, new)
+
+	for _, service := range add {
+		err = hvnicm.SelectVnic(ctx, service.(string), nicId)
+		if err != nil {
+			return err
+		}
+	}
+
+	for _, service := range remove {
+		err = hvnicm.DeselectVnic(ctx, service.(string), nicId)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func listSelectedVnicIds(candidates []types.HostVirtualNic, selected []string) []string {
+	selectedVnicIds := []string{}
+
+	for _, selectedVnicKey := range selected {
+		for _, candidateVnic := range candidates {
+			if candidateVnic.Key == selectedVnicKey {
+				selectedVnicIds = append(selectedVnicIds, candidateVnic.Device)
+			}
+		}
+	}
+
+	return selectedVnicIds
+}
+
+func getVnicServices(ctx context.Context, client *govmomi.Client, hostId, nicId string) ([]string, error) {
+	hvnicm, err := hostVirtualNicManagerFromHostSystemID(client, hostId)
+	if err != nil {
+		return nil, err
+	}
+
+	vnicInfo, err := hvnicm.Info(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get vnic info from host with id %s: %s", hostId, err)
+	}
+
+	services := []string{}
+	for _, nconfig := range vnicInfo.NetConfig {
+		service := nconfig.NicType
+		vnicIds := listSelectedVnicIds(nconfig.CandidateVnic, nconfig.SelectedVnic)
+		for _, vnicId := range vnicIds {
+			if vnicId == nicId {
+				services = append(services, service)
+			}
+		}
+	}
+
+	return services, nil
 }
 
 func splitHostIdNicId(d *schema.ResourceData) (string, string) {

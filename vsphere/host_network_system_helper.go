@@ -3,6 +3,7 @@ package vsphere
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/hostsystem"
 	"github.com/hashicorp/terraform-provider-vsphere/vsphere/internal/helper/network"
@@ -19,7 +20,12 @@ import (
 func hostNetworkSystemFromHostSystem(hs *object.HostSystem) (*object.HostNetworkSystem, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultAPITimeout)
 	defer cancel()
-	return hs.ConfigManager().NetworkSystem(ctx)
+	hns, err := hs.ConfigManager().NetworkSystem(ctx)
+	if err != nil {
+		log.Printf("[DEBUG] Failed to access the host's NetworkSystem service: %s", err)
+		return nil, err
+	}
+	return hns, nil
 }
 
 // hostNetworkSystemFromHostSystemID locates a HostNetworkSystem from a
@@ -30,6 +36,21 @@ func hostNetworkSystemFromHostSystemID(client *govmomi.Client, hsID string) (*ob
 		return nil, err
 	}
 	return hostNetworkSystemFromHostSystem(hs)
+}
+
+func hostVirtualNicManagerFromHostSystemID(client *govmomi.Client, hsID string) (*object.HostVirtualNicManager, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), defaultAPITimeout)
+	defer cancel()
+	hs, err := hostsystem.FromID(client, hsID)
+	if err != nil {
+		return nil, err
+	}
+	hvnicm, err := hs.ConfigManager().VirtualNicManager(ctx)
+	if err != nil {
+		log.Printf("[DEBUG] Failed to access the host's VirtualNicManager service: %s", err)
+		return nil, err
+	}
+	return hvnicm, nil
 }
 
 // hostVSwitchFromName locates a virtual switch on the supplied
